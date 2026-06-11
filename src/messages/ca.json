@@ -1,0 +1,212 @@
+{
+  "nav": {
+    "inicio": "Inici",
+    "nosotros": "Qui som",
+    "servicios": "Serveis",
+    "galeria": "Galeria",
+    "blog": "Blog",
+    "faq": "Preguntes",
+    "contacto": "Contacte"
+  },
+  "hero": {
+    "title": "Vidres Valls",
+    "subtitle": "Cristalleria professional a Valls, Tarragona",
+    "description": "Solucions en cristall i alumini per a cases i negocis. Més de 20 anys d'experiència que parlen per nosaltres.",
+    "cta": "Demana pressupost",
+    "ctaSecondary": "Veure serveis",
+    "badge": "Més de 20 anys d'experiència"
+  },
+  "services": {
+    "title": "Els nostres serveis",
+    "subtitle": "Solucions completes en cristalleria",
+    "viewDetail": "Veure detall",
+    "requestBudget": "Demana pressupost",
+    "ventanas": {
+      "title": "Finestres de cristall",
+      "description": "Doble vidre, baix-emissiu, temperat. Aïllament tèrmic i acústic excel·lent per a la teva llar."
+    },
+    "puertas": {
+      "title": "Portes de cristall",
+      "description": "Correderes, batents, automàtiques. Disseny i funcionalitat per a cada espai."
+    },
+    "mamparas": {
+      "title": "Mampares de bany",
+      "description": "Dutxa, divisoris, a mida. Estil i accessibilitat al teu lavabo."
+    },
+    "barandillas": {
+      "title": "Baranes de cristall",
+      "description": "Escales, balcons, terrasses. Elegància i seguretat en cristall temperat."
+    },
+    "espejos": {
+      "title": "Miralls a mida",
+      "description": "Amb bisell, LED, decoratius. Personalització total per al teu espai."
+    },
+    "decorativos": {
+      "title": "Cristalls decoratius",
+      "description": "Gravats, serigrafiats, de color. Dona personalitat a la teva llar."
+    },
+    "herreria": {
+      "title": "Ferreria i alumini",
+      "description": "Finestres d'alumini, portes. Estructures resistents i duradores."
+    },
+    "reparacion": {
+      "title": "Reparació i manteniment",
+      "description": "Servei tècnic, substitucions. Mantén les teves instal·lacions en perfecte estat."
+    }
+  },
+  "testimonials": {
+    "title": "El que diuen els nostres clients",
+    "googleRating": "Valoració a Google",
+    "reviews": [
+      { "name": "Jordi Serra", "text": "Van fer la mampara de la dutxa perfectament. Treball net i ràpid. Molt recomanables!", "rating": 5 },
+      { "name": "Montserrat Ferrer", "text": "Excel·lent atenció al client. Van resoldre el meu problema amb la finestra en temps rècord.", "rating": 5 },
+      { "name": "David Martín", "text": "La barana de cristall de la terrassa queda impressionant. Treball profesional i preu just.", "rating": 5 },
+      { "name": "Laura García", "text": "Portes de cristall per al negoci: quedaven perfectes. Finançament i assessorament excel·lents.", "rating": 5 }
+    ],
+    "subtitle": "Les opinions dels nostres clients",
+    "allReviews": "Veure totes les ressenyes a Google",
+    "filterAll": "Tots",
+    "filter5": "5 estrelles",
+    "filter4": "4 estrelles"
+  },
+  "about": {
+    "title": "Qui som",
+    "subtitle": "La teva cristalleria de confiança a Tarragona",
+    "history": "Vidres Valls és la teva cristalleria de confiança a Valls, Tarragona. Amb més de 20 anys d'experiència, oferim solucions personalitzades en cristall i alumini per a cases i negocis.",
+    "history2": "Som part de la xarxa 'Cristalls per a tu', que ens permet oferir preus competitius i la màxima qualitat en tots els nostres productes i serveis.",
+    "values": {
+      "title": "Els nostres valors",
+      "quality": "Qualitat garantida",
+      "qualityDesc": "Treballem només amb els millors materials del mercat",
+      "experience": "Experiència",
+      "experienceDesc": "Més de 20 anys en el sector",
+      "trust": "Confiança",
+      "trustDesc": "Centenars de clients satisfets",
+      "speed": "Rapidesa",
+      "speedDesc": "Resolem les teves necessitats en temps rècord"
+    }
+  },
+  "gallery": {
+    "title": "Galeria de treballs",
+    "subtitle": "Alguns dels nostres projectes recents",
+    "cta": "Veure tota la galeria"
+  },
+  "blog": {
+    "title": "Blog i notícies",
+    "subtitle": "Consells, novetats i tendències en cristalleria",
+    "readMore": "Llegir més"
+  },
+  "contact": {
+    "title": "Contacte",
+    "subtitle": "Demana el teu pressupost sense compromís",
+    "name": "Nom complet",
+    "email": "Correu electrònic",
+    "phone": "Telèfon",
+    "message": "Missatge",
+    "submit": "Enviar missatge",
+    "sending": "Enviant...",
+    "success": "Missatge enviat! Et contactarem aviat.",
+    "error": "Error en enviar. Torna-ho a intentar.",
+    "address": "Adreça",
+    "phone": "Telèfon",
+    "email": "Email",
+    "hours": "Horari",
+    "addressValue": "Ctra. del Pla, 225, NAVE 21\n43800 Valls, Tarragona"
+  },
+  "footer": {
+    "tagline": "La teva cristalleria a Valls, Tarragona",
+    "quickLinks": "Enllaços ràpids",
+    "services": "Serveis",
+    "contactInfo": "Contacte",
+    "rights": "Tots els drets reservats",
+    "legal": "Avís legal",
+    "privacy": "Política de privacitat"
+  },
+  "home": {
+    "featuredServices": "Serveis destacats",
+    "whyUs": "Per què elegir-nos",
+    "featuredTitle": "Solucions professionals en cristalleria",
+    "featuredDesc": "Des de finestres fins a baranes, oferim solucions a mida per a la teva llar o negoci.",
+    "trustedBy": "Certificacions i afiliacions",
+    "stats": {
+      "projects": "projectes",
+      "years": "anys",
+      "clients": "clients"
+    },
+    "galleryPreview": "Els nostres treballs",
+    "galleryPreviewDesc": "Descobreix alguns dels nostres projectes acabats",
+    "viewAllServices": "Veure tots els serveis",
+    "galleryPreviewCta": "Veure més",
+    "coverageTitle": "Àrees on treballem",
+    "coverageDesc": "Donem servei a tota la comarca del Tarragonès i les comarques veïnes."
+  },
+  "stats": {
+    "projects": "Projectes realitzats",
+    "years": "Anys d'experiència",
+    "clients": "Clients satisfets"
+  },
+  "cta": {
+    "title": "Necessites un pressupost?",
+    "subtitle": "T'assessorem sense compromís sobre la millor opció per al teu projecte.",
+    "phone": "Trucar ara",
+    "email": "Enviar email",
+    "notSureTitle": "No saps quin servei necessites?",
+    "notSureSubtitle": "Truca'ns i t'assessorem gratuïtament. Et ajudem a trobar la solució perfecta per al teu projecte."
+  },
+  "faq": {
+    "title": "Preguntes freqüents",
+    "subtitle": "Resolem els teus dubtes",
+    "general": "General",
+    "services": "Serveis",
+    "technical": "Tècnic",
+    "warranty": "Garantia",
+    "urgency": "Urgències"
+  },
+  "legal": {
+    "title": "Avís legal",
+    "company": "Raó social",
+    "cif": "CIF",
+    "address": "Adreça",
+    "contact": "Contacte",
+    "intellectual": "Propietat intel·lectual",
+    "liability": "Responsabilitat",
+    "law": "Llei aplicable"
+  },
+  "privacy": {
+    "title": "Política de privacitat",
+    "subtitle": "Com tractem les teves dades",
+    "controller": "Responsable del tractament",
+    "purpose": "Finalitat",
+    "basis": "Base legal",
+    "rights": "Els teus drets",
+    "retention": "Retenció de dades"
+  },
+  "presupuesto": {
+    "title": "Demana pressupost",
+    "subtitle": "Omple el formulari i et contactarem en 24h",
+    "step1": "Selecciona servei",
+    "step2": "Detalls del projecte",
+    "step3": "Les teves dades",
+    "step4": "Confirmació",
+    "service": "Tipus de servei",
+    "propertyType": "Tipus de propietat",
+    "residential": "Residencial",
+    "commercial": "Comercial",
+    "industrial": "Industrial",
+    "description": "Descriu el teu projecte",
+    "urgency": "Urgència",
+    "routine": "Rutina",
+    "urgent": "Urgent",
+    "emergency": "Emergència",
+    "preferredContact": "Mètode de contacte preferit",
+    "preferredTime": "Horari preferit",
+    "morning": "Matí",
+    "afternoon": "Tarda",
+    "nextStep": "Següent",
+    "back": "Enrere",
+    "send": "Enviar sol·licitud",
+    "name": "Nom complet",
+    "email": "Correu electrònic",
+    "phone": "Telèfon"
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "nav": {
+    "inicio": "Inicio",
+    "nosotros": "Quiénes somos",
+    "servicios": "Servicios",
+    "galeria": "Galería",
+    "blog": "Blog",
+    "faq": "Preguntas",
+    "contacto": "Contacto"
+  },
+  "hero": {
+    "title": "Vidres Valls",
+    "subtitle": "Cristalería profesional en Valls, Tarragona",
+    "description": "Soluciones en cristal y aluminio para hogares y negocios. Más de 20 años de experiencia que hablan por nosotros.",
+    "cta": "Solicitar presupuesto",
+    "ctaSecondary": "Ver servicios",
+    "badge": "Más de 20 años de experiencia"
+  },
+  "services": {
+    "title": "Nuestros servicios",
+    "subtitle": "Soluciones completas en cristalería",
+    "viewDetail": "Ver detalle",
+    "requestBudget": "Solicitar presupuesto",
+    "ventanas": {
+      "title": "Ventanas de cristal",
+      "description": "Doble acristalamiento, bajo-emisivo, templado. Aislamiento térmico y acústico excelente para tu hogar."
+    },
+    "puertas": {
+      "title": "Puertas de cristal",
+      "description": "Correderas, batientes, automáticas. Diseño y funcionalidad para cada espacio."
+    },
+    "mamparas": {
+      "title": "Mamparas de baño",
+      "description": "Ducha, divisorias, a medida. Estilo y accesibilidad en tu baño."
+    },
+    "barandillas": {
+      "title": "Barandillas de cristal",
+      "description": "Escaleras, balcones, terrazas. Elegancia y seguridad en cristal templado."
+    },
+    "espejos": {
+      "title": "Espejos a medida",
+      "description": "Con bisel, LED, decorativos. Personalización total para tu espacio."
+    },
+    "decorativos": {
+      "title": "Cristales decorativos",
+      "description": "Grabados, serigrafiados, de color. Dale personalidad a tu hogar."
+    },
+    "herreria": {
+      "title": "Herrería y aluminios",
+      "description": "Ventanas de aluminio, puertas. Estructuras resistentes y duraderas."
+    },
+    "reparacion": {
+      "title": "Reparación y mantenimiento",
+      "description": "Servicio técnico, sustituciones. Mantén tus instalaciones en perfecto estado."
+    }
+  },
+  "about": {
+    "title": "Quiénes somos",
+    "subtitle": "Tu cristalería de confianza en Tarragona",
+    "history": "Vidres Valls es tu cristalería de confianza en Valls, Tarragona. Con más de 20 años de experiencia, ofrecemos soluciones personalizadas en cristal y aluminio para hogares y negocios.",
+    "history2": "Somos parte de la red 'Cristales para ti', que nos permite ofrecer precios competitivos y la máxima calidad en todos nuestros productos y servicios.",
+    "values": {
+      "title": "Nuestros valores",
+      "quality": "Calidad garantizada",
+      "qualityDesc": "Trabajamos solo con los mejores materiales del mercado",
+      "experience": "Experiencia",
+      "experienceDesc": "Más de 20 años en el sector",
+      "trust": "Confianza",
+      "trustDesc": "Centenares de clientes satisfechos",
+      "speed": "Rapidez",
+      "speedDesc": "Resolvemos tus necesidades en tiempo récord"
+    }
+  },
+  "gallery": {
+    "title": "Galería de trabajos",
+    "subtitle": "Algunos de nuestros proyectos recientes",
+    "cta": "Ver toda la galería"
+  },
+  "blog": {
+    "title": "Blog y noticias",
+    "subtitle": "Consejos, novedades y tendencias en cristalería",
+    "readMore": "Leer más"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "Solicita tu presupuesto sin compromiso",
+    "name": "Nombre completo",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "message": "Mensaje",
+    "submit": "Enviar mensaje",
+    "sending": "Enviando...",
+    "success": "¡Mensaje enviado! Te contactaremos pronto.",
+    "error": "Error al enviar. Inténtalo de nuevo.",
+    "address": "Dirección",
+    "phone": "Teléfono",
+    "email": "Email",
+    "hours": "Horario",
+    "addressValue": "Ctra. del Pla, 225, NAVE 21\n43800 Valls, Tarragona"
+  },
+  "footer": {
+    "tagline": "Tu cristalería en Valls, Tarragona",
+    "quickLinks": "Enlaces rápidos",
+    "services": "Servicios",
+    "contactInfo": "Contacto",
+    "rights": "Todos los derechos reservados",
+    "legal": "Aviso legal",
+    "privacy": "Política de privacidad"
+  },
+  "home": {
+    "featuredServices": "Servicios destacados",
+    "whyUs": "Por qué elegirnos",
+    "featuredTitle": "Soluciones profesionales en cristalería",
+    "featuredDesc": "Desde ventanas hasta barandillas, ofrecemos soluciones a medida para tu hogar o negocio.",
+    "trustedBy": "Certificaciones y afiliaciones",
+    "stats": {
+      "projects": "proyectos",
+      "years": "años",
+      "clients": "clientes"
+    },
+    "galleryPreview": "Nuestros trabajos",
+    "galleryPreviewDesc": "Descubre algunos de nuestros proyectos terminados",
+    "viewAllServices": "Ver todos los servicios",
+    "galleryPreviewCta": "Ver más",
+    "coverageTitle": "Áreas donde trabajamos",
+    "coverageDesc": "Damos servicio a toda la comarca del Tarragonès y las comarcas vecinas."
+  },
+  "stats": {
+    "projects": "Proyectos realizados",
+    "years": "Años de experiencia",
+    "clients": "Clientes satisfechos"
+  },
+  "cta": {
+    "title": "¿Necesitas un presupuesto?",
+    "subtitle": "Te asesoramos sin compromiso sobre la mejor opción para tu proyecto.",
+    "phone": "Llamar ahora",
+    "email": "Enviar email",
+    "notSureTitle": "¿No sabes qué servicio necesitas?",
+    "notSureSubtitle": "Llámanos y te asesoramos gratuitamente. Te ayudamos a encontrar la solución perfecta para tu proyecto."
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "subtitle": "Resolvemos tus dudas",
+    "general": "General",
+    "services": "Servicios",
+    "technical": "Técnico",
+    "warranty": "Garantía",
+    "urgency": "Urgencias"
+  },
+  "legal": {
+    "title": "Aviso legal",
+    "company": "Razón social",
+    "cif": "CIF",
+    "address": "Dirección",
+    "contact": "Contacto",
+    "intellectual": "Propiedad intelectual",
+    "liability": "Responsabilidad",
+    "law": "Ley aplicable"
+  },
+  "privacy": {
+    "title": "Política de privacidad",
+    "subtitle": "Cómo tratamos tus datos",
+    "controller": "Responsable del tratamiento",
+    "purpose": "Finalidad",
+    "basis": "Base legal",
+    "rights": "Tus derechos",
+    "retention": "Retención de datos"
+  },
+  "testimonials": {
+    "title": "Testimonios de clientes",
+    "subtitle": "Las opiniones de nuestros clientes",
+    "googleRating": "Valoración en Google",
+    "allReviews": "Ver todas las reseñas en Google",
+    "filterAll": "Todos",
+    "filter5": "5 estrellas",
+    "filter4": "4 estrellas",
+    "reviews": [
+      { "name": "Jordi Serra", "text": "Hicieron la mampara de la ducha perfectamente. Trabajo limpio y rápido. ¡Muy recomendable!", "rating": 5 },
+      { "name": "Montserrat Ferrer", "text": "Excelente atención al cliente. Resolvieron mi problema con la ventana en tiempo récord.", "rating": 5 },
+      { "name": "David Martín", "text": "La barandilla de cristal de la terraza queda impresionante. Trabajo profesional y precio justo.", "rating": 5 },
+      { "name": "Laura García", "text": "Puertas de cristal para el negocio: quedaron perfectas. Financiación y asesoramiento excelentes.", "rating": 5 }
+    ]
+  },
+  "presupuesto": {
+    "title": "Solicitar presupuesto",
+    "subtitle": "Rellena el formulario y te contactaremos en 24h",
+    "step1": "Selecciona servicio",
+    "step2": "Detalles del proyecto",
+    "step3": "Tus datos",
+    "step4": "Confirmación",
+    "service": "Tipo de servicio",
+    "propertyType": "Tipo de propiedad",
+    "residential": "Residencial",
+    "commercial": "Comercial",
+    "industrial": "Industrial",
+    "description": "Describe tu proyecto",
+    "urgency": "Urgencia",
+    "routine": "Rutina",
+    "urgent": "Urgente",
+    "emergency": "Emergencia",
+    "preferredContact": "Método de contacto preferido",
+    "preferredTime": "Horario preferido",
+    "morning": "Mañana",
+    "afternoon": "Tarde",
+    "nextStep": "Siguiente",
+    "back": "Atrás",
+    "send": "Enviar solicitud",
+    "name": "Nombre completo",
+    "email": "Correo electrónico",
+    "phone": "Teléfono"
+  }
+}

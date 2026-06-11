@@ -1,0 +1,308 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Vidres Valls — Sistema de diseño "Sage / CristalApp"
+   Paleta extraída de https://srv1744329/ (app interna)
+   Migración 2026-06-11: antes era azul cyan cristalino.
+   Documentación completa: docs/STYLE-GUIDE.md
+   ============================================================ */
+
+:root {
+  /* === Verde marca (primary) === */
+  --primary:        #1a7a3a;   /* theme-color light oficial de CristalApp */
+  --primary-dark:   #156530;
+  --primary-darker: #1a6a30;
+  --primary-light:  #a8d830;   /* acento vivo (botones activos, links) */
+  --primary-soft:   #e8f4e3;   /* fondos de éxito, badges */
+  --primary-softer: #d6e4ce;
+
+  /* === Aliases para componentes existentes (no romper el código previo) === */
+  --secondary:        var(--sage-700);
+  --secondary-dark:   var(--sage-800);
+  --secondary-light:  var(--sage-500);
+  --accent:           var(--primary-light);  /* verde vivo #a8d830 */
+  --accent-dark:      var(--primary);
+  --glass-light:      var(--sage-50);
+  --glass-dark:       var(--sage-900);
+  --dark-bg:          #0a1a10;
+  --dark-surface:     #15241b;
+  --dark-card:        #1c2c10;
+
+  /* === Sage / verde salvia (base de la UI) === */
+  --sage-50:  #f4f9f0;
+  --sage-100: #ecf3e6;
+  --sage-200: #d8edd4;
+  --sage-300: #c8e0c4;
+  --sage-400: #a8d8a0;
+  --sage-500: #7a9a72;
+  --sage-600: #7a8a72;
+  --sage-700: #4a6a20;
+  --sage-800: #1a5a30;
+  --sage-900: #0c1e14;
+
+  /* === Neutros === */
+  --neutral-0:   #ffffff;
+  --neutral-50:  #f4f9f0;
+  --neutral-100: #ecf3e6;
+  --neutral-200: #c8dabe;
+  --neutral-700: #1c2c10;
+  --neutral-800: #15241b;
+  --neutral-900: #0a1a10;   /* theme-color dark oficial de CristalApp */
+
+  /* === Aliases semánticos === */
+  --background:        var(--neutral-0);
+  --background-alt:    var(--sage-50);
+  --foreground:        var(--neutral-800);
+  --foreground-muted:  var(--sage-600);
+  --surface:           var(--sage-50);
+  --border:            var(--neutral-200);
+  --border-dark:       var(--sage-300);
+  --text-muted:        var(--sage-500);
+
+  /* === Estados === */
+  --success:        var(--primary);
+  --success-bg:     var(--primary-soft);
+  --success-border: #a8d8a0;
+  --warning:        #d97706;
+  --warning-bg:     #fef3e2;
+  --error:          #c0392b;
+  --error-bg:       #fce8e6;
+  --info:           #4a6a20;
+  --info-bg:        #e0f0d8;
+}
+
+@theme inline {
+  /* Verde marca */
+  --color-primary:         var(--primary);
+  --color-primary-dark:    var(--primary-dark);
+  --color-primary-darker:  var(--primary-darker);
+  --color-primary-light:   var(--primary-light);
+  --color-primary-soft:    var(--primary-soft);
+  --color-primary-softer:  var(--primary-softer);
+
+  /* Aliases (compatibilidad con código previo) */
+  --color-secondary:       var(--secondary);
+  --color-secondary-dark:  var(--secondary-dark);
+  --color-accent:          var(--accent);
+  --color-accent-dark:     var(--accent-dark);
+  --color-glass-light:     var(--glass-light);
+  --color-glass-dark:      var(--glass-dark);
+
+  /* Sage */
+  --color-sage-50:  var(--sage-50);
+  --color-sage-100: var(--sage-100);
+  --color-sage-200: var(--sage-200);
+  --color-sage-300: var(--sage-300);
+  --color-sage-400: var(--sage-400);
+  --color-sage-500: var(--sage-500);
+  --color-sage-600: var(--sage-600);
+  --color-sage-700: var(--sage-700);
+  --color-sage-800: var(--sage-800);
+  --color-sage-900: var(--sage-900);
+
+  /* Estados */
+  --color-success:        var(--success);
+  --color-success-bg:     var(--success-bg);
+  --color-warning:        var(--warning);
+  --color-warning-bg:     var(--warning-bg);
+  --color-error:          var(--error);
+  --color-error-bg:       var(--error-bg);
+  --color-info:           var(--info);
+  --color-info-bg:        var(--info-bg);
+
+  /* Dark mode aliases (los usa .dark) */
+  --color-dark-bg:        var(--dark-bg);
+  --color-dark-surface:   var(--dark-surface);
+  --color-dark-card:      var(--dark-card);
+
+  /* Aliases semánticos */
+  --color-background:        var(--background);
+  --color-background-alt:    var(--background-alt);
+  --color-foreground:        var(--foreground);
+  --color-foreground-muted:  var(--foreground-muted);
+  --color-surface:           var(--surface);
+  --color-border:            var(--border);
+  --color-border-dark:       var(--border-dark);
+  --color-text-muted:        var(--text-muted);
+
+  /* Tipografía */
+  --font-sans:    "Inter", system-ui, sans-serif;
+  --font-display: "Manrope", "Inter", system-ui, sans-serif;
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Radios (alineados con CristalApp) */
+  --radius-sm:  .25rem;
+  --radius-md:  .375rem;
+  --radius-lg:  .5rem;
+  --radius-xl:  .75rem;
+  --radius-2xl: 1rem;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--background);
+  color: var(--foreground);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* === Scrollbar (antes era gradiente cyan, ahora verde) === */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary), var(--sage-700));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* === Gradient text — antes cyan cristalino, ahora verde salvia === */
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 50%, var(--sage-700) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === Sombras de cristal — ahora verdes === */
+.crystal-glow {
+  box-shadow: 0 0 80px rgba(26, 122, 58, 0.18), 0 0 120px rgba(168, 216, 48, 0.10);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(26, 122, 58, 0.10);
+}
+
+/* === Card de cristal (glassmorphism verde) === */
+.crystal-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(244,249,240,0.75) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(168, 216, 48, 0.18);
+  box-shadow:
+    0 4px 24px rgba(15, 23, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* === Botón cristal verde === */
+.glass-button {
+  background: linear-gradient(135deg, rgba(26, 122, 58, 0.15) 0%, rgba(74, 106, 32, 0.12) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(26, 122, 58, 0.30);
+  box-shadow:
+    0 4px 16px rgba(26, 122, 58, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+.glass-button:hover {
+  background: linear-gradient(135deg, rgba(26, 122, 58, 0.28) 0%, rgba(74, 106, 32, 0.22) 100%);
+  box-shadow:
+    0 8px 32px rgba(26, 122, 58, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+/* === Animaciones (sin cambios) === */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-20px) rotate(3deg); }
+}
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(20px) rotate(-3deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 0.8; }
+}
+.animate-float          { animation: float 6s ease-in-out infinite; }
+.animate-float-reverse  { animation: float-reverse 7s ease-in-out infinite; }
+.animate-pulse-glow     { animation: pulse-glow 3s ease-in-out infinite; }
+
+/* === Dark mode — verde oscuro === */
+.dark {
+  --background:       #0a1a10;
+  --background-alt:   #0c1e14;
+  --foreground:       #ecf3e6;
+  --foreground-muted: #7a8a72;
+  --surface:          #15241b;
+  --border:           #1c2c10;
+  --border-dark:      #4a6a20;
+  --text-muted:       #7a9a72;
+  --primary:          #a8d830;
+  --primary-dark:     #1a7a3a;
+  --primary-light:    #d8edd4;
+}
+.dark body { background: var(--background); color: var(--foreground); }
+.dark .bg-white            { background-color: var(--surface) !important; }
+.dark .bg-surface          { background-color: var(--surface) !important; }
+.dark .bg-background-alt   { background-color: var(--background-alt) !important; }
+.dark .text-foreground     { color: var(--foreground) !important; }
+.dark .text-foreground-muted { color: var(--foreground-muted) !important; }
+.dark .text-text-muted     { color: var(--text-muted) !important; }
+.dark .border-border       { border-color: var(--border) !important; }
+.dark input, .dark textarea, .dark select {
+  background-color: var(--surface);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+/* === Accesibilidad === */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  z-index: 9999;
+  padding: 1rem;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+}
+.skip-to-content:focus { left: 0; top: 0; }
+
+/* === Shimmer === */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(26, 122, 58, 0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* === Glass card hover === */
+.glass-card {
+  transition: all 0.3s ease;
+}
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(26, 122, 58, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08), 0 0 60px rgba(26, 122, 58, 0.10);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float, .animate-float-reverse, .animate-pulse-glow { animation: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
