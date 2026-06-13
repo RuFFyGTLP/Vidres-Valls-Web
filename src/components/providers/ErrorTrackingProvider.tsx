@@ -14,8 +14,6 @@ export function ErrorTrackingProvider({ children }: { children: React.ReactNode 
       console.error("[ErrorTracking]", event.error);
       // In production, send to your error tracking service here
       // e.g., fetch('/api/errors', { method: 'POST', body: JSON.stringify({ message: event.message, stack: event.error?.stack }) })
-      const message = event.message || "Unknown error";
-      const stack = event.error?.stack;
       // Send to error tracking in production
       // fetch('/api/errors', { method: 'POST', body: JSON.stringify({ message, stack }) })
     };

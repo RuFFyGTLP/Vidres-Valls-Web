@@ -10,6 +10,7 @@ interface GalleryImage {
   src: string;
   alt: string;
   category?: string;
+  label?: string;
 }
 
 interface LightboxGalleryProps {
@@ -96,10 +97,11 @@ export default function LightboxGallery({ images, columns = 3 }: LightboxGallery
               alt={image.alt}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-110"
+              unoptimized
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
             {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
             {/* Zoom icon */}
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
@@ -107,9 +109,9 @@ export default function LightboxGallery({ images, columns = 3 }: LightboxGallery
               </div>
             </div>
             {/* Bottom info */}
-            {image.category && (
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                <span className="text-white/80 text-sm capitalize">{image.category}</span>
+            {(image.label || image.category) && (
+              <div className="absolute bottom-0 left-0 right-0 min-h-16 p-4 bg-gradient-to-t from-black/95 via-black/70 to-transparent backdrop-blur-[1px]">
+                <span className="text-white text-sm font-semibold">{image.label || image.category}</span>
               </div>
             )}
           </motion.div>
@@ -163,8 +165,14 @@ export default function LightboxGallery({ images, columns = 3 }: LightboxGallery
             </button>
 
             {/* Counter */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 px-4 py-2 rounded-full bg-white/10 text-white text-sm">
+            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 px-4 py-2 rounded-full bg-white/10 text-white text-sm">
               {selectedIndex + 1} / {images.length}
+            </div>
+
+            <div className="absolute bottom-4 left-4 right-4 z-10 pointer-events-none">
+              <div className="mx-auto max-w-6xl rounded-2xl bg-black/75 px-4 py-3 text-white shadow-2xl backdrop-blur-md">
+                <p className="text-sm font-semibold">{selectedImage.alt}</p>
+              </div>
             </div>
 
             {/* Image */}
@@ -182,6 +190,7 @@ export default function LightboxGallery({ images, columns = 3 }: LightboxGallery
                 alt={selectedImage.alt}
                 fill
                 className="object-contain"
+                unoptimized
                 priority
                 sizes="100vw"
               />

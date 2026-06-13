@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useSearchParams, useParams } from "next/navigation";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
 import { Input, Textarea } from "@/components/ui/Input";
+import { Link } from "@/navigation";
+import { getLeadAttribution } from "@/lib/lead-client";
+import { trackEvent } from "@/components/providers/AnalyticsProvider";
 import {
   AppWindow, DoorOpen, ShowerHead, Mountain,
   Glasses, Sparkles, Wrench, Hammer,
@@ -26,14 +28,14 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const services = [
-  { key: "ventanas", titleCa: "Finestres de cristall", titleEs: "Ventanas de cristal" },
-  { key: "puertas", titleCa: "Portes de cristall", titleEs: "Puertas de cristal" },
-  { key: "mamparas", titleCa: "Mampares de bany", titleEs: "Mamparas de baño" },
-  { key: "barandillas", titleCa: "Baranes de cristall", titleEs: "Barandillas de cristal" },
-  { key: "espejos", titleCa: "Miralls a mida", titleEs: "Espejos a medida" },
-  { key: "decorativos", titleCa: "Cristalls decoratius", titleEs: "Cristales decorativos" },
-  { key: "herreria", titleCa: "Ferreria i alumini", titleEs: "Herrería y aluminios" },
-  { key: "reparacion", titleCa: "Reparació i manteniment", titleEs: "Reparación y mantenimiento" },
+  { key: "ventanas" },
+  { key: "puertas" },
+  { key: "mamparas" },
+  { key: "barandillas" },
+  { key: "espejos" },
+  { key: "decorativos" },
+  { key: "herreria" },
+  { key: "reparacion" },
 ];
 
 const steps = ["step1", "step2", "step3", "step4"];
@@ -88,7 +90,7 @@ export default function PresupuestoPage() {
   const handleSubmit = async () => {
     if (form.honeypot) return; // bot detected
     try {
-      await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -96,12 +98,19 @@ export default function PresupuestoPage() {
           email: form.email,
           phone: form.phone,
           message: `[Pressupost] ${form.service}\nTipus: ${form.propertyType}\nUrgència: ${form.urgency}\n\n${form.description}`,
+          service: form.service,
+          urgency: form.urgency,
+          locale,
+          source: "quote_wizard",
+          ...getLeadAttribution(),
         }),
       });
+      if (!response.ok) throw new Error("Lead delivery failed");
       setSubmitted(true);
+      trackEvent("generate_lead", { source: "quote_wizard", locale, service: form.service });
     } catch (err) {
       console.error("Presupuesto submission error:", err);
-      setSubmitted(true); // Still show success to avoid frustrating user, but log error
+      setErrors({ submit: locale === "en" ? "We could not send your request. Please try again." : locale === "es" ? "No hemos podido enviar la solicitud. Inténtalo de nuevo." : "No hem pogut enviar la sol·licitud. Torna-ho a provar." });
     }
   };
 
@@ -120,14 +129,14 @@ export default function PresupuestoPage() {
             Sol·licitud rebuda!
           </h2>
           <p className="text-text-muted mb-6">
-            Et contactarem en menys de 24h per confirmar el pressupost. Gràcies per confiar en Vidres Valls.
+            Revisarem la sol·licitud i et contactarem tan aviat com sigui possible. Gràcies per confiar en Vidres Valls.
           </p>
-          <a
+          <Link
             href="/"
             className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-semibold hover:bg-primary-dark transition-colors"
           >
             Tornar a l&apos;inici
-          </a>
+          </Link>
         </motion.div>
       </div>
     );
@@ -136,7 +145,7 @@ export default function PresupuestoPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-dark-bg via-[#0f172a] via-primary/20 to-dark-bg py-16 md:py-24">
+      <section className="page-hero page-hero--budget py-16 md:py-24">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] animate-pulse-glow" />
         </div>
@@ -210,7 +219,7 @@ export default function PresupuestoPage() {
                             className={`flex flex-col items-center gap-3 p-4 rounded-2xl border-2 transition-all ${
                               selected
                                 ? "border-primary bg-primary/5 shadow-lg shadow-primary/20"
-                                : "border-border bg-white hover:border-primary/30 hover:shadow-md"
+                                : "border-border bg-card hover:border-primary/30 hover:shadow-md"
                             }`}
                           >
                             <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
@@ -221,7 +230,7 @@ export default function PresupuestoPage() {
                             <span className={`text-xs font-semibold text-center leading-tight ${
                               selected ? "text-primary" : "text-foreground"
                             }`}>
-                              {locale === "ca" ? srv.titleCa : srv.titleEs}
+                              {tSrv(`${srv.key}.title`)}
                             </span>
                           </button>
                         );
@@ -247,7 +256,7 @@ export default function PresupuestoPage() {
                             className={`p-4 rounded-xl border-2 text-sm font-semibold transition-all ${
                               form.propertyType === type
                                 ? "border-primary bg-primary/5 text-primary"
-                                : "border-border bg-white text-text-muted hover:border-primary/30"
+                                : "border-border bg-card text-text-muted hover:border-primary/30"
                             }`}
                           >
                             {t(type)}
@@ -266,7 +275,7 @@ export default function PresupuestoPage() {
                             className={`p-4 rounded-xl border-2 text-sm font-semibold transition-all ${
                               form.urgency === urg
                                 ? "border-primary bg-primary/5 text-primary"
-                                : "border-border bg-white text-text-muted hover:border-primary/30"
+                                : "border-border bg-card text-text-muted hover:border-primary/30"
                             }`}
                           >
                             {t(urg)}
@@ -291,6 +300,7 @@ export default function PresupuestoPage() {
                       onChange={(e) => update("honeypot", e.target.value)}
                       tabIndex={-1}
                       autoComplete="off"
+                      aria-hidden="true"
                       className="absolute -left-[9999px]"
                     />
                   </div>
@@ -346,7 +356,7 @@ export default function PresupuestoPage() {
                             className={`flex-1 flex items-center justify-center gap-2 p-3 rounded-xl border-2 text-sm font-semibold transition-all ${
                               form.preferredContact === key
                                 ? "border-primary bg-primary/5 text-primary"
-                                : "border-border bg-white text-text-muted hover:border-primary/30"
+                                : "border-border bg-card text-text-muted hover:border-primary/30"
                             }`}
                           >
                             <Icon className="w-4 h-4" />
@@ -366,7 +376,7 @@ export default function PresupuestoPage() {
                             className={`flex-1 p-3 rounded-xl border-2 text-sm font-semibold transition-all ${
                               form.preferredTime === time
                                 ? "border-primary bg-primary/5 text-primary"
-                                : "border-border bg-white text-text-muted hover:border-primary/30"
+                                : "border-border bg-card text-text-muted hover:border-primary/30"
                             }`}
                           >
                             {t(time)}
@@ -415,12 +425,18 @@ export default function PresupuestoPage() {
 
                     <p className="text-sm text-text-muted text-center">
                       En fer clic a &ldquo;{t("send")}&rdquo;, acceptes la nostra{" "}
-                      <a href="/privacidad" className="text-primary underline">política de privacitat</a>.
+                      <Link href="/privacidad" className="text-primary underline">política de privacitat</Link>.
                     </p>
                   </div>
                 )}
               </motion.div>
             </AnimatePresence>
+
+            {errors.submit && (
+              <p role="alert" className="mt-6 rounded-xl border border-error/20 bg-error/10 px-4 py-3 text-sm text-error">
+                {errors.submit}
+              </p>
+            )}
 
             {/* Navigation buttons */}
             <div className="flex items-center justify-between mt-10">

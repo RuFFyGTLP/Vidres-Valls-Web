@@ -26,7 +26,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           aria-invalid={!!error}
           aria-describedby={error ? errorId : undefined}
           className={`
-            w-full px-4 py-3 rounded-xl border bg-white
+            w-full px-4 py-3 rounded-xl border bg-card
             text-foreground placeholder:text-text-muted
             focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary
             transition-all duration-200
@@ -67,7 +67,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-invalid={!!error}
           aria-describedby={error ? errorId : undefined}
           className={`
-            w-full px-4 py-3 rounded-xl border bg-white resize-none
+            w-full px-4 py-3 rounded-xl border bg-card resize-none
             text-foreground placeholder:text-text-muted
             focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary
             transition-all duration-200

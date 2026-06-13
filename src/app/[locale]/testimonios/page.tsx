@@ -1,147 +1,92 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { ClipboardCheck, MessageSquareText, Ruler, Wrench } from "lucide-react";
+import { useParams } from "next/navigation";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
-import { Star, ExternalLink, Quote } from "lucide-react";
+import CTABanner from "@/components/sections/CTABanner";
 
-const allReviews = [
-  { name: "Jordi Serra", text: "Van fer la mampara de la dutxa perfectament. Treball net i ràpid. Molt recomanables!", rating: 5, project: "Mampara de dutxa", date: "2024" },
-  { name: "Montserrat Ferrer", text: "Excel·lent atenció al client. Van resoldre el meu problema amb la finestra en temps rècord. Professionals de cap a peus.", rating: 5, project: "Finestra de cristall", date: "2024" },
-  { name: "David Martín", text: "La barana de cristall de la terrassa queda impressionant. Treball professional i preu just. Recomano 100%.", rating: 5, project: "Barana de cristall", date: "2024" },
-  { name: "Laura García", text: "Portes de cristall per al negoci: quedaven perfectes. Finançament i assessorament excel·lents. Molt satisfeta.", rating: 5, project: "Portes de cristall", date: "2023" },
-  { name: "Antoni Rovira", text: "Van fer totes les finestres de casa meva. Treball impeccable i preu competitiu. Els recomano sense dubte.", rating: 5, project: " finestres", date: "2023" },
-  { name: "Maria Josep Solsona", text: "El mirall a mida del vestidor queda preciós. Van ser molt curosos amb el muntatge. Excel·lent resultat.", rating: 5, project: "Mirall a mida", date: "2023" },
-  { name: "Joan Ramon Ortega", text: "Servei d'urgències excel·lent. Van venir en menys d'una hora a tapar un trencament. Professionals de veritat.", rating: 5, project: "Reparació urgent", date: "2024" },
-  { name: "Sandra Fernàndez", text: "La barana d'acer i cristall de l'escala queda brutal. Van resoldre un projecte complicat amb habilitat.", rating: 5, project: "Barana mixta", date: "2023" },
-];
+const copy = {
+  ca: {
+    eyebrow: "Compromis de treball",
+    title: "Un procés clar per a cada projecte",
+    subtitle: "Sense ressenyes inventades ni promeses genèriques: expliquem com abordem cada encàrrec.",
+    imageAlt: "Mampara de vidre walk-in instal·lada per Vidres Valls",
+    ctaTitle: "Parlem del teu projecte",
+    ctaSubtitle: "Envia'ns mesures, fotografies o una descripció i t'orientarem sobre la solució adequada.",
+    steps: [
+      { title: "Escoltem la necessitat", description: "Partim de l'ús, l'estil i les condicions reals de l'espai.", icon: MessageSquareText },
+      { title: "Mesurem i revisem", description: "Comprovem mesures, suports, accessos i detalls d'instal·lació.", icon: Ruler },
+      { title: "Preparem la proposta", description: "Detallem materials, solució tècnica i pressupost.", icon: ClipboardCheck },
+      { title: "Fabriquem i instal·lem", description: "Coordinem la fabricació a mida i el muntatge final.", icon: Wrench },
+    ],
+  },
+  es: {
+    eyebrow: "Compromiso de trabajo",
+    title: "Un proceso claro para cada proyecto",
+    subtitle: "Sin reseñas inventadas ni promesas genéricas: explicamos cómo abordamos cada encargo.",
+    imageAlt: "Mampara de vidrio walk-in instalada por Vidres Valls",
+    ctaTitle: "Hablemos de tu proyecto",
+    ctaSubtitle: "Envíanos medidas, fotografías o una descripción y te orientaremos sobre la solución adecuada.",
+    steps: [
+      { title: "Escuchamos la necesidad", description: "Partimos del uso, el estilo y las condiciones reales del espacio.", icon: MessageSquareText },
+      { title: "Medimos y revisamos", description: "Comprobamos medidas, soportes, accesos y detalles de instalación.", icon: Ruler },
+      { title: "Preparamos la propuesta", description: "Detallamos materiales, solución técnica y presupuesto.", icon: ClipboardCheck },
+      { title: "Fabricamos e instalamos", description: "Coordinamos la fabricación a medida y el montaje final.", icon: Wrench },
+    ],
+  },
+  en: {
+    eyebrow: "Work commitment",
+    title: "A clear process for every project",
+    subtitle: "No invented reviews or generic promises: we explain how we handle each job.",
+    imageAlt: "Walk-in glass shower screen installed by Vidres Valls",
+    ctaTitle: "Let's talk about your project",
+    ctaSubtitle: "Send us measurements, photos or a short description and we will guide you toward the right solution.",
+    steps: [
+      { title: "We listen first", description: "We start with the use, style and real conditions of the space.", icon: MessageSquareText },
+      { title: "We measure and review", description: "We check dimensions, supports, access points and installation details.", icon: Ruler },
+      { title: "We prepare the proposal", description: "We detail materials, the technical solution and the quote.", icon: ClipboardCheck },
+      { title: "We build and install", description: "We coordinate made-to-measure production and final installation.", icon: Wrench },
+    ],
+  },
+};
 
 export default function TestimoniosPage() {
-  const t = useTranslations("testimonials");
-  const [filter, setFilter] = useState<number | "all">("all");
-
-  const filtered = filter === "all" ? allReviews : allReviews.filter((r) => r.rating === filter);
+  const locale = ((useParams().locale as string) || "ca") as keyof typeof copy;
+  const t = copy[locale] || copy.ca;
 
   return (
     <div>
-      {/* Hero */}
-      <section className="relative bg-gradient-to-br from-dark-bg via-[#0f172a] via-primary/20 to-dark-bg py-20 md:py-28">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] animate-pulse-glow" />
-        </div>
+      <section className="relative overflow-hidden bg-dark-bg py-20 md:py-28">
+        <Image src="/images/projects/mampara-walk-in.png" alt={t.imageAlt} fill className="object-cover opacity-25" sizes="100vw" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark-bg via-dark-bg/90 to-dark-bg/50" />
         <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="relative text-center max-w-3xl mx-auto"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-manrope)] text-white mb-4">
-              {t("title")}
-            </h1>
-            <p className="text-xl text-white/60 mb-6">{t("subtitle")}</p>
-
-            {/* Google Rating Badge */}
-            <a
-              href="https://www.google.com/maps/place/Vidres+Valls"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm hover:bg-white/20 transition-colors"
-            >
-              <div className="flex">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-amber-400 fill-amber-400" />
-                ))}
-              </div>
-              <div className="text-left">
-                <p className="text-white font-bold text-sm">4.8 / 5</p>
-                <p className="text-white/60 text-xs">127 ressenyes a Google</p>
-              </div>
-              <ExternalLink className="w-4 h-4 text-white/60 ml-1" />
-            </a>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative max-w-3xl">
+            <span className="text-sm font-semibold uppercase tracking-[0.18em] text-primary-light">{t.eyebrow}</span>
+            <h1 className="mt-4 text-4xl md:text-5xl font-bold text-white">{t.title}</h1>
+            <p className="mt-4 text-xl text-white/70">{t.subtitle}</p>
           </motion.div>
         </Container>
       </section>
 
-      {/* Reviews */}
       <Section spacing="lg">
         <Container>
-          {/* Filter */}
-          <div className="flex flex-wrap gap-3 justify-center mb-12">
-            <button
-              onClick={() => setFilter("all")}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
-                filter === "all"
-                  ? "bg-primary text-white shadow-lg shadow-primary/30"
-                  : "bg-surface border border-border text-text-muted hover:border-primary/30 hover:text-primary"
-              }`}
-            >
-              {t("filterAll")}
-            </button>
-            {[5, 4].map((r) => (
-              <button
-                key={r}
-                onClick={() => setFilter(r)}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all flex items-center gap-1.5 ${
-                  filter === r
-                    ? "bg-primary text-white shadow-lg shadow-primary/30"
-                    : "bg-surface border border-border text-text-muted hover:border-primary/30 hover:text-primary"
-                }`}
-              >
-                <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-                {r} {t("filter5")}
-              </button>
-            ))}
-          </div>
-
-          {/* Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((review, i) => (
-              <motion.div
-                key={`${review.name}-${i}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: (i % 6) * 0.06 }}
-                className="group relative p-6 rounded-2xl border border-border bg-white hover:bg-gradient-to-br hover:from-primary/5 hover:to-secondary/5 hover:border-primary/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-              >
-                {/* Quote icon */}
-                <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/10" />
-
-                {/* Stars */}
-                <div className="flex gap-0.5 mb-3">
-                  {Array.from({ length: 5 }).map((_, si) => (
-                    <Star
-                      key={si}
-                      className={`w-4 h-4 ${si < review.rating ? "text-amber-400 fill-amber-400" : "text-gray-200"}`}
-                    />
-                  ))}
-                </div>
-
-                {/* Text */}
-                <blockquote className="text-foreground leading-relaxed text-sm mb-4">
-                  &ldquo;{review.text}&rdquo;
-                </blockquote>
-
-                {/* Meta */}
-                <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-xs font-bold">
-                      {review.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-sm text-foreground">{review.name}</p>
-                      <p className="text-xs text-text-muted">{review.project}</p>
-                    </div>
-                  </div>
-                  <span className="text-xs text-text-muted">{review.date}</span>
-                </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {t.steps.map((step, index) => (
+              <motion.div key={step.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }} className="rounded-2xl border border-border bg-card p-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary"><step.icon className="h-6 w-6" /></div>
+                <p className="mt-5 text-xs font-bold text-primary">0{index + 1}</p>
+                <h2 className="mt-2 text-xl font-bold text-foreground">{step.title}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-foreground-muted">{step.description}</p>
               </motion.div>
             ))}
           </div>
         </Container>
       </Section>
+
+      <CTABanner title={t.ctaTitle} subtitle={t.ctaSubtitle} />
     </div>
   );
 }

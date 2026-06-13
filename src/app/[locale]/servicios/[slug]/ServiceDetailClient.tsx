@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Link } from "@/navigation";
@@ -21,15 +22,30 @@ interface Service {
 interface Props {
   service: Service;
   slug: string;
-  t: ReturnType<typeof useTranslations>;
   allServices: Record<string, Service>;
 }
 
-export default function ServiceDetailClient({ service, slug, t, allServices }: Props) {
+const serviceHeaderImages: Record<string, string> = {
+  ventanas: "/images/gallery/ventanas-04.jpg",
+  puertas: "/images/gallery/puertas-01.jpg",
+  mamparas: "/images/gallery/mamparas-01.jpg",
+  barandillas: "/images/gallery/barandillas-01.jpg",
+  espejos: "/images/gallery/espejos-01.jpg",
+  decorativos: "/images/gallery/decorativos-01.jpg",
+  herreria: "/images/gallery/puertas-04.jpg",
+  reparacion: "/images/gallery/ventanas-07.jpg",
+};
+
+export default function ServiceDetailClient({ service, slug, allServices }: Props) {
+  const t = useTranslations("services");
+  const heroStyle = {
+    "--hero-image": `url("${serviceHeaderImages[slug] ?? "/images/projects/ventanales-mediterraneos.png"}")`,
+  } as CSSProperties;
+
   return (
     <div>
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-dark-bg via-[#1a1035] to-dark-bg py-20 md:py-28">
+      <section className="page-hero py-20 md:py-28" style={heroStyle}>
         <div className="absolute inset-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] animate-pulse-glow" />
         </div>
@@ -42,10 +58,10 @@ export default function ServiceDetailClient({ service, slug, t, allServices }: P
             )}
             <div className="text-6xl mb-6">{service.icon}</div>
             <h1 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-manrope)] text-white mb-4">
-              {service.titleCa}
+              {t(`${slug}.title`)}
             </h1>
             <p className="text-xl text-white/60 max-w-2xl leading-relaxed">
-              {service.descriptionCa}
+              {t(`${slug}.description`)}
             </p>
           </motion.div>
         </Container>
@@ -74,7 +90,7 @@ export default function ServiceDetailClient({ service, slug, t, allServices }: P
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
-                className="p-6 rounded-2xl border border-border bg-white hover:shadow-xl hover:-translate-y-1 hover:border-primary/20 transition-all duration-300"
+                className="p-6 rounded-2xl border border-border bg-card hover:shadow-xl hover:-translate-y-1 hover:border-primary/20 transition-all duration-300"
               >
                 <h3 className="font-bold font-[family-name:var(--font-manrope)] text-foreground mb-2">
                   {feature.title}
@@ -155,10 +171,10 @@ export default function ServiceDetailClient({ service, slug, t, allServices }: P
                 <Link
                   key={key}
                   href={`/servicios/${key}`}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border bg-white hover:border-primary/30 hover:bg-primary/5 text-foreground hover:text-primary transition-all text-sm font-medium"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border bg-card hover:border-primary/30 hover:bg-primary/5 text-foreground hover:text-primary transition-all text-sm font-medium"
                 >
                   <span>{s.icon}</span>
-                  <span>{s.titleCa}</span>
+                  <span>{t(`${key}.title`)}</span>
                 </Link>
               ))}
           </div>
@@ -168,7 +184,7 @@ export default function ServiceDetailClient({ service, slug, t, allServices }: P
       {/* CTA */}
       <CTABanner
         title="Necesites aquest servei?"
-        subtitle="Contacta amb nosaltres i t&apos;assessorem sense compromís. Et donem pressupost en 24h."
+        subtitle="Contacta amb nosaltres i t&apos;assessorem sense compromís. Prepararem una proposta adaptada al teu projecte."
       />
     </div>
   );

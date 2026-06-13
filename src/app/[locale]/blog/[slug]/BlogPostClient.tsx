@@ -1,11 +1,14 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import Image from "next/image";
 import { Link } from "@/navigation";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
 import CTABanner from "@/components/sections/CTABanner";
+import { getBlogCategoryLabel, getBlogExcerpt, getBlogTitle } from "@/lib/blog-i18n";
 
 interface Post {
   slug: string;
@@ -26,19 +29,35 @@ interface Props {
   relatedPosts: Post[];
 }
 
+const blogHeaderImages: Record<string, string> = {
+  "elegir-cristall-adequat": "/images/gallery/ventanas-05.jpg",
+  "tendencias-mamparas-bano-2024": "/images/gallery/mamparas-06.jpg",
+  "mantenimiento-cristales-guia-practica": "/images/gallery/ventanas-10.jpg",
+  "barandillas-cristal-seguretat-disseny": "/images/gallery/barandillas-03.jpg",
+  "diferencias-cristal-templado-laminado": "/images/gallery/barandillas-06.jpg",
+  "innovaciones-cristal-inteligente-2024": "/images/gallery/decorativos-07.jpg",
+  "reformas-con-cristal-ahorrar-energia": "/images/gallery/puertas-07.jpg",
+  "espejos-decorativos-tendencias": "/images/gallery/espejos-02.jpg",
+};
+
 export default function BlogPostClient({ post, relatedPosts }: Props) {
-  const t = useTranslations("blog");
+  const locale = useLocale();
+  const title = getBlogTitle(post, locale);
+  const excerpt = getBlogExcerpt(post, locale);
 
   // Dynamic URL for social sharing
   const postUrl = typeof window !== "undefined" ? window.location.href : `https://vidres-valls-web.vercel.app/blog/${post.slug}`;
 
   // Convert markdown-like content to HTML sections
   const sections = post.content.split("\n\n").filter(Boolean);
+  const heroStyle = {
+    "--hero-image": `url("${blogHeaderImages[post.slug] ?? "/images/projects/vinoteca-vidrio.png"}")`,
+  } as CSSProperties;
 
   return (
     <div>
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-dark-bg via-[#1a1035] to-dark-bg py-20 md:py-28">
+      <section className="page-hero py-20 md:py-28" style={heroStyle}>
         <div className="absolute inset-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] animate-pulse-glow" />
         </div>
@@ -50,22 +69,22 @@ export default function BlogPostClient({ post, relatedPosts }: Props) {
           >
             <div className="flex items-center gap-3 mb-4">
               <span className="px-3 py-1 bg-primary/20 text-primary-light text-sm font-medium rounded-full">
-                {post.category}
+                {getBlogCategoryLabel(post.category, locale)}
               </span>
               <span className="text-white/40 text-sm">{post.date}</span>
               <span className="text-white/40 text-sm">· {post.readTime}</span>
             </div>
             <h1 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-manrope)] text-white mb-4">
-              {post.title}
+              {title}
             </h1>
-            <p className="text-lg text-white/60">{post.excerpt}</p>
+            <p className="text-lg text-white/60">{excerpt}</p>
           </motion.div>
         </Container>
       </section>
 
       {/* Cover Image */}
-      <div className="w-full h-64 md:h-96 bg-gradient-to-br from-primary/20 to-secondary/20">
-        <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+      <div className="relative w-full h-64 md:h-96 bg-gradient-to-br from-primary/20 to-secondary/20">
+        <Image src={post.image} alt={title} fill sizes="100vw" className="object-cover" priority />
       </div>
 
       {/* Article Content */}
@@ -161,10 +180,12 @@ export default function BlogPostClient({ post, relatedPosts }: Props) {
 
             {/* Share */}
             <div className="mt-12 pt-8 border-t border-border">
-              <p className="text-sm text-text-muted mb-4">Comparteix aquest article:</p>
+              <p className="text-sm text-text-muted mb-4">
+                {locale === "es" ? "Comparte este artículo:" : locale === "en" ? "Share this article:" : "Comparteix aquest article:"}
+              </p>
               <div className="flex gap-3">
                 <a
-                  href={`https://wa.me/?text=${encodeURIComponent(post.title)}`}
+                  href={`https://wa.me/?text=${encodeURIComponent(title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center text-success hover:bg-success hover:text-white transition-colors"
@@ -184,7 +205,7 @@ export default function BlogPostClient({ post, relatedPosts }: Props) {
                   </svg>
                 </a>
                 <a
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(postUrl)}`}
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(postUrl)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors"
@@ -204,7 +225,7 @@ export default function BlogPostClient({ post, relatedPosts }: Props) {
         <Section spacing="lg" className="bg-surface border-t border-border">
           <Container>
             <h3 className="text-2xl font-bold font-[family-name:var(--font-manrope)] text-foreground mb-8">
-              Articles relacionats
+              {locale === "es" ? "Artículos relacionados" : locale === "en" ? "Related articles" : "Articles relacionats"}
             </h3>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {relatedPosts.map((related, i) => (
@@ -217,19 +238,21 @@ export default function BlogPostClient({ post, relatedPosts }: Props) {
                 >
                   <Link
                     href={`/blog/${related.slug}`}
-                    className="group block rounded-2xl overflow-hidden border border-border bg-white hover:shadow-xl hover:-translate-y-1 transition-all"
+                    className="group block rounded-2xl overflow-hidden border border-border bg-card hover:shadow-xl hover:-translate-y-1 transition-all"
                   >
-                    <div className="aspect-[16/9] bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden">
-                      <img
+                    <div className="relative aspect-[16/9] bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden">
+                      <Image
                         src={related.image}
-                        alt={related.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        alt={getBlogTitle(related, locale)}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, 100vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                     <div className="p-4">
-                      <span className="text-xs text-text-muted">{related.category}</span>
+                      <span className="text-xs text-text-muted">{getBlogCategoryLabel(related.category, locale)}</span>
                       <h4 className="font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2 mt-1">
-                        {related.title}
+                        {getBlogTitle(related, locale)}
                       </h4>
                     </div>
                   </Link>
@@ -242,8 +265,8 @@ export default function BlogPostClient({ post, relatedPosts }: Props) {
 
       {/* CTA */}
       <CTABanner
-        title="Necesites ajuda amb el teu projecte?"
-        subtitle="Els nostres experts et poden assessorar sense compromís."
+        title={locale === "es" ? "¿Necesitas ayuda con tu proyecto?" : locale === "en" ? "Need help with your project?" : "Necessites ajuda amb el teu projecte?"}
+        subtitle={locale === "es" ? "Te asesoramos sin compromiso para elegir la solución de vidrio adecuada." : locale === "en" ? "We can help you choose the right glass solution with no obligation." : "T'assessorem sense compromís per triar la solució de vidre adequada."}
       />
     </div>
   );

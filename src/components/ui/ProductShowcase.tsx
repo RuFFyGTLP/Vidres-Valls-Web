@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { Link } from "@/navigation";
 import { X, ChevronLeft, ChevronRight, Maximize2, Filter } from "lucide-react";
 
 interface Product {
@@ -52,8 +53,8 @@ const products: Product[] = [
     description: "Porta corredera de cristall templat amb sistema automàtic. Sensor de moviment integrat.",
     descriptionEs: "Puerta corredera de cristal templado con sistema automático. Sensor de movimiento integrado.",
     features: ["Sensor de moviment", "Cristall templat 10mm", "Obertura automàtica"],
-    image: "/galeria/ventana-2.jpg",
-    thumbnail: "/galeria/ventana-2.jpg",
+    image: "/galeria/fachada-1.jpg",
+    thumbnail: "/galeria/fachada-1.jpg",
   },
   {
     id: "p2",
@@ -64,8 +65,8 @@ const products: Product[] = [
     description: "Porta pivotant d'alta gama amb frontisses invisibles. disseny modern i elegant.",
     descriptionEs: "Puerta pivotante de alta gama con bisagras invisibles. Diseño moderno y elegante.",
     features: ["Frontisses invisibles", "Fulla de 12mm", "Tancament multipunt"],
-    image: "/galeria/ventana-1.jpg",
-    thumbnail: "/galeria/ventana-1.jpg",
+    image: "/galeria/edificio-1.jpg",
+    thumbnail: "/galeria/edificio-1.jpg",
   },
   {
     id: "c1",
@@ -100,8 +101,8 @@ const products: Product[] = [
     description: "Fachada de cristall amb estructura d'alumini. Màxima transparència i eficiència.",
     descriptionEs: "Fachada de cristal con estructura de aluminio. Máxima transparencia y eficiencia.",
     features: ["Estructura alumini", "Cristall triple", "Aïllament tèrmic"],
-    image: "/galeria/fachada-1.jpg",
-    thumbnail: "/galeria/fachada-1.jpg",
+    image: "/galeria/barandilla-1.jpg",
+    thumbnail: "/galeria/barandilla-1.jpg",
   },
 ];
 
@@ -180,7 +181,7 @@ export default function ProductShowcase({ locale = "ca" }: { locale?: string }) 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="group relative bg-white dark:bg-dark-card rounded-2xl overflow-hidden border border-border dark:border-border-dark hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1"
+            className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1"
           >
             {/* Image */}
             <div className="relative aspect-[4/3] overflow-hidden">
@@ -277,7 +278,7 @@ export default function ProductShowcase({ locale = "ca" }: { locale?: string }) 
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.2 }}
-              className="relative w-full max-w-5xl max-h-[90vh] bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-2xl"
+              className="relative w-full max-w-5xl max-h-[90vh] bg-card rounded-2xl overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="grid md:grid-cols-2 h-full">
@@ -315,18 +316,18 @@ export default function ProductShowcase({ locale = "ca" }: { locale?: string }) 
                     ))}
                   </ul>
                   <div className="flex gap-3">
-                    <a
+                    <Link
                       href="/contacto"
                       className="flex-1 px-6 py-3 bg-primary text-white font-semibold rounded-xl text-center hover:bg-primary-dark transition-colors"
                     >
                       Demanar pressupost
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       href="/presupuesto"
                       className="px-6 py-3 border-2 border-primary text-primary font-semibold rounded-xl hover:bg-primary/5 transition-colors"
                     >
                       Calcula preu
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

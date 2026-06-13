@@ -1,244 +1,101 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
+import { DraftingCompass, MapPin, Ruler, ShieldCheck, Wrench } from "lucide-react";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
 import CTABanner from "@/components/sections/CTABanner";
 
-const team = [
-  {
-    name: "Joan Martí",
-    role: "Director general",
-    bio: "Més de 25 anys en el sector del vidre i l'alumini. Fundador de Vidres Valls amb una passió per les solucions innovadores.",
-    initials: "JM",
-    color: "from-primary to-primary-dark",
-  },
-  {
-    name: "Anna García",
-    role: "Cap d'instal·lacions",
-    bio: "Especialista en instal·lacions de baranes i mampares. Certificació europea en tractament de vidre de seguretat.",
-    initials: "AG",
-    color: "from-secondary to-secondary-dark",
-  },
-  {
-    name: "Marc López",
-    role: "Assessor comercial",
-    bio: "Expert en pressupostos i assessorament personalitzat. Et ajuda a trobar la millor solució per al teu projecte.",
-    initials: "ML",
-    color: "from-accent to-accent-dark",
-  },
-  {
-    name: "Laia Ferrer",
-    role: "Administració",
-    bio: "Gestió de comandes, pressupostos i atenció al client. El rostre amigable de Vidres Valls.",
-    initials: "LF",
-    color: "from-success to-emerald-600",
-  },
-];
-
-const certifications = [
-  { name: "Cristales para ti", desc: "Xarxa de cristalleries de confiança" },
-  { name: "ISO 9001", desc: "Gestió de qualitat certificada" },
-  { name: "CE Marking", desc: "Certificació de seguretat europea" },
-  { name: "AENOR", desc: "Associació Espanyola de Normalització" },
+const capabilities = [
+  { title: "Medición precisa", description: "Revisamos huecos, soportes y accesos antes de fabricar.", icon: Ruler },
+  { title: "Diseño a medida", description: "Adaptamos vidrio, perfilería y herrajes al uso del espacio.", icon: DraftingCompass },
+  { title: "Montaje cuidado", description: "Protegemos la zona de trabajo y cuidamos cada remate.", icon: Wrench },
+  { title: "Vidrio adecuado", description: "Proponemos soluciones templadas, laminadas o aislantes según el proyecto.", icon: ShieldCheck },
 ];
 
 export default function SobreNosotrosPage() {
   const t = useTranslations("about");
+  const locale = (useParams().locale as string) || "ca";
+  const local = locale === "en"
+    ? { badge: "Local glazing specialists", heading: "Over 20 years working with glass and aluminium", body: "We handle residential and commercial projects, from replacements and custom mirrors to enclosures, shower screens, balustrades and glass façades.", process: "How we work", processTitle: "From technical detail to a clean finish" }
+    : locale === "es"
+      ? { badge: "Cristalería de proximidad", heading: "Más de 20 años trabajando vidrio y aluminio", body: "Atendemos proyectos residenciales y comerciales: desde una sustitución o un espejo a medida hasta cerramientos, mamparas, barandillas y fachadas de vidrio.", process: "Cómo trabajamos", processTitle: "Del detalle técnico a un acabado limpio" }
+      : { badge: "Cristalleria de proximitat", heading: "Més de 20 anys treballant vidre i alumini", body: "Atenem projectes residencials i comercials: des d'una substitució o un mirall a mida fins a tancaments, mampares, baranes i façanes de vidre.", process: "Com treballem", processTitle: "Del detall tècnic a un acabat net" };
 
   return (
     <div>
-      {/* Hero */}
-      <section className="relative bg-gradient-to-br from-dark-bg via-[#1a1035] to-dark-bg py-20 md:py-28">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] animate-pulse-glow" />
-        </div>
+      <section className="page-hero page-hero--about bg-dark-bg py-20 md:py-28">
+        <div className="absolute inset-0 bg-gradient-to-r from-dark-bg via-dark-bg/90 to-dark-bg/55" />
         <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="relative text-center max-w-3xl mx-auto"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-manrope)] text-white mb-4">
-              {t("title")}
-            </h1>
-            <p className="text-xl text-white/60">{t("subtitle")}</p>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative max-w-3xl">
+            <span className="block text-sm font-semibold uppercase tracking-[0.18em] text-primary-light">Vidres Valls</span>
+            <h1 className="mt-4 text-4xl md:text-5xl font-bold font-[family-name:var(--font-manrope)] text-white">{t("title")}</h1>
+            <p className="mt-4 text-xl text-white/70">{t("subtitle")}</p>
           </motion.div>
         </Container>
       </section>
 
-      {/* History */}
       <Section spacing="lg">
         <Container>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4">
-                La nostra història
-              </span>
-              <h2 className="text-3xl font-bold font-[family-name:var(--font-manrope)] text-foreground mb-6">
-                Més de 20 anys de dedicació
-              </h2>
-              <p className="text-foreground-muted text-lg leading-relaxed mb-6">
-                {t("history")}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <span className="inline-flex rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">{local.badge}</span>
+              <h2 className="mt-5 text-3xl font-bold font-[family-name:var(--font-manrope)] text-foreground">{local.heading}</h2>
+              <p className="mt-5 text-lg leading-relaxed text-foreground-muted">{t("history")}</p>
+              <p className="mt-4 leading-relaxed text-foreground-muted">
+                {local.body}
               </p>
-              <p className="text-foreground-muted leading-relaxed">
-                {t("history2")}
-              </p>
+              <div className="mt-7 flex items-center gap-3 text-foreground">
+                <MapPin className="h-5 w-5 text-primary" />
+                <span className="font-semibold">Ctra. del Pla, 225, NAVE 21 · Valls</span>
+              </div>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="relative"
-            >
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20 flex items-center justify-center">
-                <div className="text-center">
-                  <span className="text-8xl">🏆</span>
-                  <p className="mt-4 text-foreground font-semibold">Des de 2004</p>
-                </div>
-              </div>
-              <div className="absolute -bottom-4 -right-4 px-6 py-3 bg-primary text-white rounded-xl shadow-xl">
-                <span className="text-2xl font-bold">20+</span>
-                <span className="block text-sm text-white/80">anys d'experiència</span>
-              </div>
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border shadow-2xl">
+              <Image src="/images/projects/barandilla-terraza.png" alt="Solución residencial de vidrio y aluminio" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
             </motion.div>
           </div>
         </Container>
       </Section>
 
-      {/* Team */}
-      <Section spacing="lg" className="bg-surface border-t border-border">
+      <Section spacing="lg" className="bg-surface border-y border-border">
         <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold font-[family-name:var(--font-manrope)] text-foreground mb-4">
-              El nostre equip
-            </h2>
-            <p className="text-foreground-muted max-w-2xl mx-auto">
-              Professionals compromesos amb la qualitat i el servei al client
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member, i) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="text-center p-6 rounded-2xl bg-white border border-border hover:shadow-xl hover:-translate-y-1 transition-all"
-              >
-                <div
-                  className={`w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br ${member.color} flex items-center justify-center text-white text-xl font-bold`}
-                >
-                  {member.initials}
-                </div>
-                <h3 className="font-bold font-[family-name:var(--font-manrope)] text-foreground">
-                  {member.name}
-                </h3>
-                <p className="text-sm text-primary font-medium mb-3">{member.role}</p>
-                <p className="text-xs text-text-muted leading-relaxed">{member.bio}</p>
+          <div className="max-w-2xl">
+            <span className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{local.process}</span>
+            <h2 className="mt-3 text-3xl font-bold text-foreground">{local.processTitle}</h2>
+          </div>
+          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {capabilities.map((item, index) => (
+              <motion.div key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }} className="rounded-2xl border border-border bg-card p-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary"><item.icon className="h-6 w-6" /></div>
+                <h3 className="mt-5 font-bold text-foreground">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-foreground-muted">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </Container>
       </Section>
 
-      {/* Values */}
-      <Section spacing="lg">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold font-[family-name:var(--font-manrope)] text-foreground mb-4">
-              {t("values.title")}
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-4 gap-6">
-            {(["quality", "experience", "trust", "speed"] as const).map((value, i) => (
-              <motion.div
-                key={value}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="text-center p-6 rounded-2xl bg-surface border border-border"
-              >
-                <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    {value === "quality" && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />}
-                    {value === "experience" && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />}
-                    {value === "trust" && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />}
-                    {value === "speed" && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />}
-                  </svg>
-                </div>
-                <h3 className="font-bold font-[family-name:var(--font-manrope)] text-foreground mb-1">
-                  {t(`values.${value}`)}
-                </h3>
-                <p className="text-sm text-text-muted">{t(`values.${value}Desc`)}</p>
-              </motion.div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* Certifications */}
       <Section spacing="lg" dark>
         <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold font-[family-name:var(--font-manrope)] text-white mb-4">
-              Certificacions i afiliacions
-            </h2>
-            <p className="text-white/60">Compromís amb l'excel·lència i la qualitat</p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {certifications.map((cert, i) => (
-              <motion.div
-                key={cert.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-6 rounded-2xl bg-dark-card border border-white/10 text-center"
-              >
-                <div className="text-4xl mb-3">🏆</div>
-                <h3 className="font-bold font-[family-name:var(--font-manrope)] text-white mb-1">
-                  {cert.name}
-                </h3>
-                <p className="text-sm text-text-muted">{cert.desc}</p>
-              </motion.div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              ["Hogar", "Ventanas, mamparas, espejos, barandillas y soluciones decorativas."],
+              ["Comercio", "Escaparates, puertas, divisiones y cerramientos para negocios."],
+              ["Mantenimiento", "Sustitución de vidrios y revisión de instalaciones existentes."],
+            ].map(([title, description]) => (
+              <div key={title} className="rounded-2xl border border-white/10 bg-dark-card p-7">
+                <h3 className="text-xl font-bold text-white">{title}</h3>
+                <p className="mt-3 leading-relaxed text-text-muted">{description}</p>
+              </div>
             ))}
           </div>
         </Container>
       </Section>
 
-      {/* CTA */}
-      <CTABanner
-        title="Vol conèixer l'equip en persona?"
-        subtitle="Truca'ns o visitans a les nostres instal·lacions. Et rebran amb un somriure."
-      />
+      <CTABanner title="¿Tienes una medida o una idea?" subtitle="Cuéntanos qué necesitas y prepararemos una propuesta adaptada a tu espacio." />
     </div>
   );
 }

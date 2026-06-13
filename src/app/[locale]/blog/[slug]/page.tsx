@@ -50,7 +50,7 @@ export default async function BlogPostPage({ params }: Props) {
       "name": "Vidres Valls",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://vidres-valls-web.vercel.app/logo.jpg",
+        "url": "https://vidres-valls-web.vercel.app/logo-vidres-valls.png",
       },
     },
     "mainEntityOfPage": {

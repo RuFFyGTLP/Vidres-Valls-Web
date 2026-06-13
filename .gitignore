@@ -29,9 +29,11 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+tmp_*
 
 # env files (can opt-in for committing if needed)
 .env*
+data/leads.jsonl
 
 # vercel
 .vercel

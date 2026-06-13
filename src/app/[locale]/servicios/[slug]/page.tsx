@@ -134,7 +134,7 @@ export const services = {
     descriptionCa: "Servei tècnic especialitzat en reparació i manteniment de tot tipus d'instal·lacions de cristall i alumini. Resolem qualsevol incidència.",
     descriptionEs: "Servicio técnico especializado en reparación y mantenimiento de todo tipo de instalaciones de cristal y aluminio. Resolvemos cualquier incidencia.",
     features: [
-      { title: "Reparació urgent", desc: "Servei 24h per a emergències" },
+      { title: "Reparació i substitució", desc: "Consulta disponibilitat per a incidències" },
       { title: "Substitució de vidres", desc: "Canvi de vidres trencats o deteriorats" },
       { title: "Ajust de portes i finestres", desc: "Reixiu el funcionament de les teves obertures" },
       { title: "Canvi de juntes", desc: "Restablim l'estanqueïtat i aïllament" },
@@ -142,31 +142,27 @@ export const services = {
       { title: "Assegurances", desc: "Treballem amb les principals companyies" },
     ],
     applications: ["Habitatges particulars", "Comunitats de veins", "Empreses", "Administracions"],
-    badge: "24h",
+    badge: "Reparació",
   },
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params;
-  const isSpanish = locale === "es";
   const service = services[slug as keyof typeof services];
 
   if (!service) return { title: "Servei no trobat" };
 
-  return {
-    title: isSpanish ? service.titleEs : service.titleCa,
-    description: isSpanish ? service.descriptionEs : service.descriptionCa,
-  };
+  const t = await getTranslations({ locale, namespace: "services" });
+  return { title: t(`${slug}.title`), description: t(`${slug}.description`) };
 }
 
 export default async function ServiceDetailPage({ params }: Props) {
-  const { slug, locale } = await params;
-  const t = await getTranslations({ locale, namespace: "services" });
+  const { slug } = await params;
 
   const service = services[slug as keyof typeof services];
   if (!service) {
     notFound();
   }
 
-  return <ServiceDetailClient service={service} slug={slug} t={t} allServices={services} />;
+  return <ServiceDetailClient service={service} slug={slug} allServices={services} />;
 }

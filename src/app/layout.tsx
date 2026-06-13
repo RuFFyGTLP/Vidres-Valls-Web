@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Inter } from "next/font/google";
+import { ServiceWorkerRegistration } from "@/components/providers/ServiceWorkerRegistration";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -23,19 +24,19 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#0EA5E9" },
-    { media: "(prefers-color-scheme: dark)", color: "#030712" },
+    { media: "(prefers-color-scheme: light)", color: "#15723a" },
+    { media: "(prefers-color-scheme: dark)", color: "#050d08" },
   ],
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vidres-valls-web.vercel.app"),
   title: {
-    default: "Vidres Valls | Cristalería profesional en Valls, Tarragona",
+    default: "Vidres Valls | Cristalleria professional a Valls, Tarragona",
     template: "%s | Vidres Valls",
   },
   description:
-    "Soluciones profesionales en cristal y aluminio para hogares y negocios. Más de 20 años de experiencia en Valls, Tarragona. Ventanas, puertas, mamparas, barandillas.",
+    "Solucions professionals en vidre i alumini per a llars i negocis. Més de 20 anys d'experiència a Valls, Tarragona.",
   keywords: [
     "cristalería",
     "vidrio",
@@ -53,25 +54,25 @@ export const metadata: Metadata = {
   creator: "Vidres Valls",
   openGraph: {
     type: "website",
-    locale: "es_ES",
+    locale: "ca_ES",
     url: "https://vidres-valls-web.vercel.app",
     siteName: "Vidres Valls",
-    title: "Vidres Valls | Cristalería profesional en Valls, Tarragona",
+    title: "Vidres Valls | Cristalleria professional a Valls, Tarragona",
     description:
-      "Soluciones profesionales en cristal y aluminio. Más de 20 años de experiencia.",
+      "Solucions professionals en vidre i alumini. Més de 20 anys d'experiència.",
     images: [
       {
-        url: "/logo.jpg",
-        width: 800,
-        height: 600,
-        alt: "Vidres Valls - Cristalería profesional en Valls, Tarragona",
+        url: "/logo-vidres-valls.png",
+        width: 512,
+        height: 512,
+        alt: "Vidres Valls - Cristalleria professional a Valls, Tarragona",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vidres Valls | Cristalería profesional",
-    description: "Soluciones profesionales en cristal y aluminio en Tarragona.",
+    title: "Vidres Valls | Cristalleria professional",
+    description: "Solucions professionals en vidre i alumini a Tarragona.",
   },
   robots: {
     index: true,
@@ -89,6 +90,7 @@ export const metadata: Metadata = {
     languages: {
       ca: "https://vidres-valls-web.vercel.app/ca",
       es: "https://vidres-valls-web.vercel.app/es",
+      en: "https://vidres-valls-web.vercel.app/en",
     },
   },
 };
@@ -97,7 +99,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Vidres Valls",
-  "image": "https://vidres-valls-web.vercel.app/logo.jpg",
+  "image": "https://vidres-valls-web.vercel.app/logo-vidres-valls.png",
   "description": "Cristalería profesional en Valls, Tarragona. Más de 20 años de experiencia en cristal y aluminio.",
   "url": "https://vidres-valls-web.vercel.app",
   "telephone": "+34-616-88-74-38",
@@ -130,13 +132,6 @@ const jsonLd = {
     { "@type": "City", "name": "Reus" },
     { "@type": "AdministrativeArea", "name": "Tarragonès" },
   ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "127",
-    "bestRating": "5",
-    "worstRating": "1",
-  },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Serveis de cristalleria",
@@ -148,13 +143,9 @@ const jsonLd = {
       { "@type": "Offer", "name": "Miralls a mida", "description": "LED, decoratius, bany" },
       { "@type": "Offer", "name": "Cristalls decoratius", "description": "Serigrafiats, gravats, de color" },
       { "@type": "Offer", "name": "Ferreria i alumini", "description": "Estructures, finestres, portes" },
-      { "@type": "Offer", "name": "Reparació i manteniment", "description": "Servei tècnic 24h" },
+      { "@type": "Offer", "name": "Reparació i manteniment", "description": "Substitució i manteniment de vidres" },
     ],
   },
-  "sameAs": [
-    "https://www.facebook.com/vidresvalls",
-    "https://www.instagram.com/vidresvalls",
-  ],
 };
 
 export default function RootLayout({
@@ -163,20 +154,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ca" className={`${manrope.variable} ${inter.variable}`}>
+    <html lang="ca" suppressHydrationWarning className={`${manrope.variable} ${inter.variable}`}>
       <head>
         {/* Preconnect for performance */}
-        <link rel="preconnect" href="https://images.unsplash.com" />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
         {/* Favicon */}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/favicon.jpg" />
+        <link rel="apple-touch-icon" href="/logo-vidres-valls.png" />
 
         {/* Manifest */}
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#0EA5E9" />
+        <meta name="theme-color" content="#15723a" />
         <meta name="apple-mobile-web-app-title" content="Vidres Valls" />
 
         {/* DNS prefetch for external resources */}
@@ -188,23 +177,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* Service Worker Registration */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                  navigator.serviceWorker.register('/sw.js').catch(() => {});
-                });
-              }
-            `,
-          }}
-        />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
-        <a href="#main-content" className="skip-to-content">
-          Saltar al contingut
-        </a>
+        <ServiceWorkerRegistration />
         {children}
       </body>
     </html>

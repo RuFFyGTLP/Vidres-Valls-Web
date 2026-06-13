@@ -12,7 +12,7 @@ export default function PrivacidadPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-dark-bg via-[#0f172a] via-primary/20 to-dark-bg py-20 md:py-28">
+      <section className="page-hero page-hero--privacy py-20 md:py-28">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] animate-pulse-glow" />
         </div>

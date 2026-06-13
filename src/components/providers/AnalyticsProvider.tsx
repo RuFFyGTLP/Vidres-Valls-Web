@@ -2,13 +2,12 @@
 
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
 
 // Simple analytics provider — replace with GA4 or Plausible by updating these functions
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
-    dataLayer?: any[];
+    gtag?: (command: string, eventName: string, params?: Record<string, unknown>) => void;
+    dataLayer?: Record<string, unknown>[];
     plausible?: (event: string, opts?: { props: Record<string, string | number> }) => void;
   }
 }

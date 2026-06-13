@@ -21,7 +21,7 @@ export default function Card({
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={`
-        rounded-2xl border border-border bg-white
+        rounded-2xl border border-border bg-card
         ${hover ? "hover:shadow-xl hover:-translate-y-1 hover:border-primary/20 transition-all duration-300" : ""}
         ${className}
       `}

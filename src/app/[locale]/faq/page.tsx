@@ -32,8 +32,8 @@ const faqs: FAQItem[] = [
     category: "services",
   },
   {
-    q: "Feu servei d'urgències 24h?",
-    a: "Sí, disposem de servei d'urgències 24h per a trencalls i incidents. Truca'ns al 616 88 74 38 i intentarem resoldre el teu problema el més aviat possible.",
+    q: "Atendeu reparacions urgents?",
+    a: "Atendemos sustituciones y reparaciones. Llámanos al 616 88 74 38 para consultar disponibilidad y explicar el incidente.",
     category: "urgency",
   },
   {
@@ -68,7 +68,7 @@ const faqs: FAQItem[] = [
   },
   {
     q: "Què passa si el cristall es trenca fora de l'horari?",
-    a: "El nostre servei d'urgències 24h està disponible per a trencalls que requereixin atenció immediata. Truca'ns i un professional es posarà en contacte amb tu ràpidament.",
+    a: "En caso de rotura, llámanos y explica la situación. Revisaremos la disponibilidad y la solución más adecuada para asegurar la zona y sustituir el vidrio.",
     category: "urgency",
   },
   {
@@ -144,7 +144,7 @@ export default function FAQPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-dark-bg via-[#0f172a] via-primary/20 to-dark-bg py-20 md:py-28">
+      <section className="page-hero page-hero--faq py-20 md:py-28">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] animate-pulse-glow" />
         </div>

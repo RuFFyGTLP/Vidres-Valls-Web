@@ -26,7 +26,7 @@ export default function Section({
     <section
       id={id}
       className={`
-        ${dark ? "bg-dark-bg text-white" : "bg-white text-foreground"}
+        ${dark ? "bg-dark-bg text-white" : "bg-background text-foreground"}
         ${spacingMap[spacing]}
         ${className}
       `}

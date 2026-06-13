@@ -1,8 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useState, useSyncExternalStore } from "react";
 
 const whatsappNumber = "34616887438"; // Formato internacional (34 = España)
 
@@ -17,29 +16,27 @@ function isBusinessHours() {
   return false;
 }
 
-export default function WhatsAppButton() {
-  const params = useParams();
-  const locale = (params.locale as string) || "ca";
+interface WhatsAppButtonProps {
+  locale?: string;
+}
+
+export default function WhatsAppButton({ locale = "ca" }: WhatsAppButtonProps) {
   const [visible, setVisible] = useState(true);
-  const [open, setOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useSyncExternalStore(
+    (onStoreChange) => {
+      const interval = window.setInterval(onStoreChange, 60_000);
+      return () => window.clearInterval(interval);
+    },
+    isBusinessHours,
+    () => false,
+  );
 
-  // Detect business hours on mount and every minute
-  useEffect(() => {
-    setIsOpen(isBusinessHours());
-    const interval = setInterval(() => setIsOpen(isBusinessHours()), 60_000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const pageName = locale === "ca" ? "Vidres Valls - CA" : "Vidres Valls - ES";
-  const message = locale === "ca"
-    ? `Hola! M'interessa demanar un pressupost per a... (Des de: ${pageName})`
-    : `Hola! Me interesa solicitar un presupuesto para... (Desde: ${pageName})`;
-
-  const openLabel = locale === "ca" ? "Oberts ara" : "Abierto ahora";
-  const closedLabel = locale === "ca" ? "Tancats" : "Cerrado";
-  const contactLabel = locale === "ca" ? "Contactar per WhatsApp" : "Contactar por WhatsApp";
-  const closeLabel = locale === "ca" ? "Tancar" : "Cerrar";
+  const copy = locale === "en"
+    ? { page: "Vidres Valls - EN", message: "Hello! I would like a quote for...", open: "Open now", closed: "Closed", contact: "Contact via WhatsApp", close: "Close" }
+    : locale === "es"
+      ? { page: "Vidres Valls - ES", message: "Hola! Me interesa solicitar un presupuesto para...", open: "Abierto ahora", closed: "Cerrado", contact: "Contactar por WhatsApp", close: "Cerrar" }
+      : { page: "Vidres Valls - CA", message: "Hola! M'interessa demanar un pressupost per a...", open: "Oberts ara", closed: "Tancats", contact: "Contactar per WhatsApp", close: "Tancar" };
+  const message = `${copy.message} (${copy.page})`;
 
   return (
     <AnimatePresence>
@@ -61,7 +58,7 @@ export default function WhatsAppButton() {
             <span
               className={`w-2 h-2 rounded-full ${isOpen ? "bg-success animate-pulse" : "bg-error"}`}
             />
-            <span className="font-medium">{isOpen ? openLabel : closedLabel}</span>
+            <span className="font-medium">{isOpen ? copy.open : copy.closed}</span>
             <span className="text-white/60 ml-1">· 616 88 74 38</span>
           </motion.div>
 
@@ -70,7 +67,7 @@ export default function WhatsAppButton() {
             href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={contactLabel}
+            aria-label={copy.contact}
             className="group relative w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-2xl shadow-[#25D366]/30 hover:scale-110 transition-transform"
           >
             <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping" />
@@ -87,7 +84,7 @@ export default function WhatsAppButton() {
           <button
             onClick={() => setVisible(false)}
             className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-surface border border-border flex items-center justify-center text-text-muted hover:text-foreground transition-colors"
-            aria-label={closeLabel}
+            aria-label={copy.close}
           >
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

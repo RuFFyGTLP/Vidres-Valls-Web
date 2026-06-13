@@ -14,7 +14,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="relative w-14 h-7 rounded-full bg-surface border border-border flex items-center justify-between px-1 hover:bg-surface-dark transition-colors"
+      className="theme-track relative w-14 h-7 rounded-full border border-border flex items-center justify-between px-1 transition-colors"
       aria-label={label}
     >
       {/* Sun */}
@@ -43,7 +43,7 @@ export default function ThemeToggle() {
       <motion.div
         animate={{ x: theme === "light" ? 0 : 28 }}
         transition={{ type: "spring", stiffness: 500, damping: 30 }}
-        className="w-5 h-5 rounded-full bg-white shadow-md z-10"
+        className="theme-thumb w-5 h-5 rounded-full shadow-md z-10"
       />
     </button>
   );

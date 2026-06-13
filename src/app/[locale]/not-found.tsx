@@ -5,7 +5,7 @@ import { Link } from "@/navigation";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-dark-bg via-[#1a1035] to-dark-bg">
+    <div className="page-hero min-h-screen flex items-center justify-center">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 border border-primary/20 rounded-full animate-float" />

@@ -55,16 +55,11 @@
     }
   },
   "testimonials": {
-    "title": "El que diuen els nostres clients",
-    "googleRating": "Valoració a Google",
-    "reviews": [
-      { "name": "Jordi Serra", "text": "Van fer la mampara de la dutxa perfectament. Treball net i ràpid. Molt recomanables!", "rating": 5 },
-      { "name": "Montserrat Ferrer", "text": "Excel·lent atenció al client. Van resoldre el meu problema amb la finestra en temps rècord.", "rating": 5 },
-      { "name": "David Martín", "text": "La barana de cristall de la terrassa queda impressionant. Treball profesional i preu just.", "rating": 5 },
-      { "name": "Laura García", "text": "Portes de cristall per al negoci: quedaven perfectes. Finançament i assessorament excel·lents.", "rating": 5 }
-    ],
-    "subtitle": "Les opinions dels nostres clients",
-    "allReviews": "Veure totes les ressenyes a Google",
+    "title": "El nostre procés de treball",
+    "googleRating": "Atenció directa",
+    "reviews": [],
+    "subtitle": "Com abordem cada projecte",
+    "allReviews": "Conèixer com treballem",
     "filterAll": "Tots",
     "filter5": "5 estrelles",
     "filter4": "4 estrelles"
@@ -73,22 +68,22 @@
     "title": "Qui som",
     "subtitle": "La teva cristalleria de confiança a Tarragona",
     "history": "Vidres Valls és la teva cristalleria de confiança a Valls, Tarragona. Amb més de 20 anys d'experiència, oferim solucions personalitzades en cristall i alumini per a cases i negocis.",
-    "history2": "Som part de la xarxa 'Cristalls per a tu', que ens permet oferir preus competitius i la màxima qualitat en tots els nostres productes i serveis.",
+    "history2": "Treballem cada encàrrec de forma directa, des de la medició i elecció del vidre fins a la fabricació i el muntatge.",
     "values": {
       "title": "Els nostres valors",
-      "quality": "Qualitat garantida",
-      "qualityDesc": "Treballem només amb els millors materials del mercat",
+      "quality": "Acabats cuidats",
+      "qualityDesc": "Seleccionem materials adequats per a cada aplicació",
       "experience": "Experiència",
       "experienceDesc": "Més de 20 anys en el sector",
       "trust": "Confiança",
-      "trustDesc": "Centenars de clients satisfets",
+      "trustDesc": "Atenció directa durant tot el projecte",
       "speed": "Rapidesa",
-      "speedDesc": "Resolem les teves necessitats en temps rècord"
+      "speedDesc": "Coordinem mesura, fabricació i muntatge"
     }
   },
   "gallery": {
     "title": "Galeria de treballs",
-    "subtitle": "Alguns dels nostres projectes recents",
+    "subtitle": "Exemples visuals de solucions en vidre i alumini",
     "cta": "Veure tota la galeria"
   },
   "blog": {
@@ -127,14 +122,14 @@
     "whyUs": "Per què elegir-nos",
     "featuredTitle": "Solucions professionals en cristalleria",
     "featuredDesc": "Des de finestres fins a baranes, oferim solucions a mida per a la teva llar o negoci.",
-    "trustedBy": "Certificacions i afiliacions",
+    "trustedBy": "Com treballem",
     "stats": {
       "projects": "projectes",
       "years": "anys",
       "clients": "clients"
     },
     "galleryPreview": "Els nostres treballs",
-    "galleryPreviewDesc": "Descobreix alguns dels nostres projectes acabats",
+    "galleryPreviewDesc": "Explora exemples de les solucions que podem fabricar i instal·lar",
     "viewAllServices": "Veure tots els serveis",
     "galleryPreviewCta": "Veure més",
     "coverageTitle": "Àrees on treballem",
@@ -183,7 +178,7 @@
   },
   "presupuesto": {
     "title": "Demana pressupost",
-    "subtitle": "Omple el formulari i et contactarem en 24h",
+    "subtitle": "Omple el formulari i et contactarem tan aviat com sigui possible",
     "step1": "Selecciona servei",
     "step2": "Detalls del projecte",
     "step3": "Les teves dades",

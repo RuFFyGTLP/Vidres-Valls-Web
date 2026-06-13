@@ -1,25 +1,26 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useSyncExternalStore } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "@/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 
 function useMediaQuery(query: string, defaultState = false) {
-  const [matches, setMatches] = useState(defaultState);
-  useEffect(() => {
-    const m = window.matchMedia(query);
-    setMatches(m.matches);
-    const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
-    m.addEventListener("change", handler);
-    return () => m.removeEventListener("change", handler);
-  }, [query]);
-  return matches;
+  return useSyncExternalStore(
+    (onStoreChange) => {
+      const mediaQuery = window.matchMedia(query);
+      mediaQuery.addEventListener("change", onStoreChange);
+      return () => mediaQuery.removeEventListener("change", onStoreChange);
+    },
+    () => window.matchMedia(query).matches,
+    () => defaultState,
+  );
 }
 
 export default function Hero() {
   const t = useTranslations("hero");
+  const locale = useLocale();
   const containerRef = useRef<HTMLDivElement>(null);
   const isDesktop = useMediaQuery("(min-width: 768px)", true);
 
@@ -31,6 +32,8 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const floatingCardLeftY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const floatingCardRightY = useTransform(scrollYProgress, [0, 1], [0, 60]);
 
   return (
     <section
@@ -41,7 +44,7 @@ export default function Hero() {
       <div className="absolute inset-0">
         <motion.div style={{ scale }} className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80"
+            src="/images/projects/cerramiento-terraza.png"
             alt="Vidres Valls - Cristalería profesional"
             fill
             className="object-cover"
@@ -60,11 +63,11 @@ export default function Hero() {
         <div className="absolute inset-0 overflow-hidden">
           {/* Floating glass cards */}
           <motion.div
-            style={{ y: useTransform(scrollYProgress, [0, 1], [0, -80]) }}
+            style={{ y: floatingCardLeftY }}
             className="absolute top-20 -left-10 w-64 h-80 border border-primary/20 rounded-3xl animate-float glass"
           />
           <motion.div
-            style={{ y: useTransform(scrollYProgress, [0, 1], [0, 60]) }}
+            style={{ y: floatingCardRightY }}
             className="absolute bottom-32 -right-16 w-56 h-72 border border-secondary/20 rounded-3xl animate-float-reverse glass"
           />
           <motion.div
@@ -186,7 +189,7 @@ export default function Hero() {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>Lun–Vie: 7:00–15:00</span>
+            <span>{locale === "en" ? "Mon-Fri: 7:00-15:00" : locale === "es" ? "Lun-Vie: 7:00-15:00" : "Dl-Dv: 7:00-15:00"}</span>
           </div>
         </motion.div>
       </motion.div>

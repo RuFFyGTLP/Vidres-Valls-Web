@@ -57,7 +57,7 @@ export default function ServiceCard({
     >
       <Link
         href={href}
-        className="group relative flex flex-col h-full p-6 rounded-2xl border border-border bg-white hover:bg-gradient-to-br hover:from-primary/5 hover:to-secondary/5 hover:border-primary/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+        className="group relative flex flex-col h-full p-6 rounded-2xl border border-border bg-card hover:bg-gradient-to-br hover:from-primary/5 hover:to-secondary/5 hover:border-primary/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
         aria-label={`${title} - ${description}`}
       >
         {/* Glass shimmer on hover */}

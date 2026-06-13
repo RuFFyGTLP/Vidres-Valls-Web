@@ -6,28 +6,13 @@ import Hero from "@/components/sections/Hero";
 import StatsBar from "@/components/sections/StatsBar";
 import TrustBar from "@/components/sections/TrustBar";
 import ServiceCard from "@/components/sections/ServiceCard";
-import TestimonialCard from "@/components/sections/TestimonialCard";
 import CTABanner from "@/components/sections/CTABanner";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
 import { Link } from "@/navigation";
 import { motion } from "framer-motion";
-import { AppWindow, DoorOpen, ShowerHead, Mountain, Glasses, Sparkles } from "lucide-react";
-import dynamic from "next/dynamic";
-
-const GlassExperience = dynamic(() => import("@/components/three/GlassExperience"), {
-  ssr: false,
-  loading: () => <div className="h-[400px] bg-gradient-to-br from-dark-bg via-sage-900/50 to-dark-bg" />
-});
-
-const iconMap: Record<string, React.ElementType> = {
-  ventanas: AppWindow,
-  puertas: DoorOpen,
-  mamparas: ShowerHead,
-  barandillas: Mountain,
-  espejos: Glasses,
-  decorativos: Sparkles,
-};
+import Image from "next/image";
+import LeadCapture from "@/components/sections/LeadCapture";
 
 const services = [
   { key: "ventanas" },
@@ -45,10 +30,12 @@ const whyUsPoints = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
-    titleCa: "Qualitat garantida",
-    titleEs: "Calidad garantizada",
-    descCa: "Materials premium i acabats impecables en cada projecte",
-    descEs: "Materiales premium y acabados impecables en cada proyecto",
+    titleCa: "Acabats cuidats",
+    titleEs: "Acabados cuidados",
+    titleEn: "Careful finishes",
+    descCa: "Selecció de materials i atenció als remats de cada instal·lació",
+    descEs: "Selección de materiales y atención a los remates de cada instalación",
+    descEn: "Material selection and precise finishing details in every installation",
   },
   {
     icon: (
@@ -56,10 +43,12 @@ const whyUsPoints = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    titleCa: "Rapidesa d&apos;execució",
-    titleEs: "Rapidez de ejecución",
-    descCa: "Terminis de lliurament ràpids sense comprometre la qualitat",
-    descEs: "Plazos de entrega rápidos sin comprometer la calidad",
+    titleCa: "Planificació clara",
+    titleEs: "Planificación clara",
+    titleEn: "Clear planning",
+    descCa: "Coordinem mesura, fabricació i muntatge segons cada projecte",
+    descEs: "Coordinamos medición, fabricación y montaje según cada proyecto",
+    descEn: "Measurement, fabrication and installation coordinated for each project",
   },
   {
     icon: (
@@ -67,19 +56,66 @@ const whyUsPoints = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
     ),
-    titleCa: "Assessoria personalitzada",
-    titleEs: "Asesoría personalizada",
-    descCa: "Et guiem per triar la millor solució per al teu espai",
-    descEs: "Te guiamos para elegir la mejor solución para tu espacio",
+    titleCa: "Atenció directa",
+    titleEs: "Atención directa",
+    titleEn: "Direct support",
+    descCa: "T'ajudem a definir una solució adequada per al teu espai",
+    descEs: "Te ayudamos a definir una solución adecuada para tu espacio",
+    descEn: "We help define the right glass solution for your space",
   },
 ];
 
 const galleryPreviews = [
-  { title: "Finestra corredera", color: "from-sage-500 to-sage-700" },
-  { title: "Mampara de dutxa", color: "from-primary-light to-sage-600" },
-  { title: "Barana de cristall", color: "from-amber-400 to-orange-500" },
-  { title: "Porta automàtica", color: "from-emerald-400 to-teal-600" },
+  { titleCa: "Marquesina de vidre", titleEs: "Marquesina de vidrio", titleEn: "Glass entrance canopy", image: "/images/gallery/puertas-03.jpg" },
+  { titleCa: "Vinoteca de vidre", titleEs: "Vinoteca de vidrio", titleEn: "Glass wine cellar", image: "/images/gallery/decorativos-09.jpg" },
+  { titleCa: "Frontal de cuina", titleEs: "Frontal de cocina", titleEn: "Glass kitchen splashback", image: "/images/gallery/decorativos-02.jpg" },
+  { titleCa: "Substitució de vidre", titleEs: "Sustitución de vidrio", titleEn: "Window glass replacement", image: "/images/gallery/ventanas-08.jpg" },
 ];
+
+const homeCopy = {
+  ca: {
+    workshopEyebrow: "Instal·lació de divisòries de vidre",
+    workshopTitle: "Vidre net, precís i ben instal·lat",
+    workshopBody: "Instal·lem divisòries i tancaments interiors amb ferratges discrets, guies ben ajustades i acabats pensats per integrar-se en oficines, comerços i habitatges.",
+    workshopLink: "Conèixer com treballem",
+    processTitle: "Del primer contacte al muntatge",
+    processBody: "Un procés clar perquè sàpigues quina solució instal·larem i com avançarà el projecte.",
+    process: [
+      ["01", "Consulta", "Ens expliques l'espai, la necessitat i l'acabat que busques."],
+      ["02", "Mesura", "Revisem mides, suports, accessos i requisits de seguretat."],
+      ["03", "Proposta", "Definim vidre, perfileria, ferratges i pressupost."],
+      ["04", "Instal·lació", "Fabriquem a mida i fem un muntatge cuidat."],
+    ],
+  },
+  es: {
+    workshopEyebrow: "Instalación de divisorias de vidrio",
+    workshopTitle: "Vidrio limpio, preciso y bien instalado",
+    workshopBody: "Instalamos divisorias y cerramientos interiores con herrajes discretos, guías bien ajustadas y acabados pensados para integrarse en oficinas, comercios y viviendas.",
+    workshopLink: "Conocer cómo trabajamos",
+    processTitle: "Del primer contacto al montaje",
+    processBody: "Un proceso claro para que sepas qué solución instalaremos y cómo avanzará el proyecto.",
+    process: [
+      ["01", "Consulta", "Nos explicas el espacio, la necesidad y el acabado que buscas."],
+      ["02", "Medición", "Revisamos medidas, soportes, accesos y requisitos de seguridad."],
+      ["03", "Propuesta", "Definimos vidrio, perfilería, herrajes y presupuesto."],
+      ["04", "Instalación", "Fabricamos a medida y realizamos un montaje cuidado."],
+    ],
+  },
+  en: {
+    workshopEyebrow: "Glass partition installation",
+    workshopTitle: "Clean, precise and properly fitted glass",
+    workshopBody: "We install interior partitions and enclosures with discreet hardware, well-adjusted tracks and finishes designed for offices, shops and homes.",
+    workshopLink: "See how we work",
+    processTitle: "From first contact to installation",
+    processBody: "A clear process so you know which solution we will install and how the project will move forward.",
+    process: [
+      ["01", "Consultation", "You tell us about the space, the need and the finish you want."],
+      ["02", "Measurement", "We check dimensions, supports, access and safety requirements."],
+      ["03", "Proposal", "We define glass, profiles, hardware and quote."],
+      ["04", "Installation", "We fabricate to measure and install with care."],
+    ],
+  },
+};
 
 export default function HomePage() {
   const params = useParams();
@@ -87,9 +123,8 @@ export default function HomePage() {
   const t = useTranslations();
   const tServices = useTranslations("services");
   const tHome = useTranslations("home");
-  const tAbout = useTranslations("about");
-  const tTestimonials = useTranslations("testimonials");
   const tCta = useTranslations("cta");
+  const c = homeCopy[locale as keyof typeof homeCopy] ?? homeCopy.ca;
 
   return (
     <div>
@@ -102,10 +137,38 @@ export default function HomePage() {
       {/* 3. Stats Counter */}
       <StatsBar />
 
-      {/* 3.5 3D Glass Experience */}
-      <section className="relative h-[500px] overflow-hidden">
-        <GlassExperience className="absolute inset-0" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background pointer-events-none" />
+      {/* 3.5 Workshop */}
+      <section className="bg-background py-16 md:py-24">
+        <Container>
+          <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-border shadow-2xl"
+            >
+              <Image
+                src="/images/projects/mampara-walk-in.png"
+                alt={c.workshopTitle}
+                fill
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover"
+              />
+            </motion.div>
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <span className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{c.workshopEyebrow}</span>
+              <h2 className="mt-4 text-3xl md:text-4xl font-bold font-[family-name:var(--font-manrope)] text-foreground">
+                {c.workshopTitle}
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-foreground-muted">
+                {c.workshopBody}
+              </p>
+              <Link href="/sobre-nosotros" className="mt-7 inline-flex items-center gap-2 font-semibold text-primary hover:gap-3 transition-all">
+                {c.workshopLink} <span aria-hidden="true">→</span>
+              </Link>
+            </motion.div>
+          </div>
+        </Container>
       </section>
 
       {/* 4. Featured Services */}
@@ -184,9 +247,9 @@ export default function HomePage() {
                   {point.icon}
                 </div>
                 <h3 className="text-xl font-bold font-[family-name:var(--font-manrope)] text-white mb-3">
-                  {locale === "es" ? point.titleEs : point.titleCa}
+                  {locale === "en" ? point.titleEn : locale === "es" ? point.titleEs : point.titleCa}
                 </h3>
-                <p className="text-text-muted">{locale === "es" ? point.descEs : point.descCa}</p>
+                <p className="text-text-muted">{locale === "en" ? point.descEn : locale === "es" ? point.descEs : point.descCa}</p>
               </motion.div>
             ))}
           </div>
@@ -216,12 +279,19 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className={`group relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br ${item.color} cursor-pointer`}
+                className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
               >
+                <Image
+                  src={item.image}
+                  alt={locale === "en" ? item.titleEn : locale === "es" ? item.titleEs : item.titleCa}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-white/80 font-semibold text-center px-4">
-                    {item.title}
+                    {locale === "en" ? item.titleEn : locale === "es" ? item.titleEs : item.titleCa}
                   </span>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
@@ -252,7 +322,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* 7. Testimonials */}
+      {/* 7. Process */}
       <Section spacing="lg" dark>
         <Container>
           <motion.div
@@ -261,37 +331,34 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <a
-              href="https://www.google.com/maps/place/Vidres+Valls/@41.2866,1.2499,15z"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-4 hover:bg-accent/20 transition-colors"
-            >
-              <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-              <span className="text-sm font-semibold text-accent">
-                {tTestimonials("googleRating")} — 4.8/5
-              </span>
-            </a>
             <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-manrope)] text-white mb-4">
-              {tTestimonials("title")}
+              {c.processTitle}
             </h2>
+            <p className="text-text-muted max-w-2xl mx-auto">
+              {c.processBody}
+            </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {tTestimonials.raw("reviews").map((review: any, i: number) => (
-              <TestimonialCard
-                key={i}
-                name={review.name}
-                text={review.text}
-                rating={review.rating}
-                delay={i * 0.08}
-              />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {c.process.map(([number, title, description], i) => (
+              <motion.div
+                key={number}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="rounded-2xl border border-white/10 bg-dark-card p-6"
+              >
+                <span className="text-sm font-bold text-primary-light">{number}</span>
+                <h3 className="mt-4 text-xl font-bold text-white">{title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-text-muted">{description}</p>
+              </motion.div>
             ))}
           </div>
         </Container>
       </Section>
+
+      <LeadCapture />
 
       {/* 8. Coverage Area */}
       <Section spacing="lg" className="bg-surface border-t border-border">
@@ -356,7 +423,7 @@ export default function HomePage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Vidres Valls - ubicación"
+                title={locale === "en" ? "Vidres Valls - location" : locale === "es" ? "Vidres Valls - ubicación" : "Vidres Valls - ubicació"}
               />
             </motion.div>
 

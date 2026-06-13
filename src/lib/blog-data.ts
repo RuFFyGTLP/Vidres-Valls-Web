@@ -38,12 +38,12 @@ La elecció depèn de varies factors:
 3. **Nivell de soroll** - Si vius en una zona tranquil·la, un simple doble vidre pot ser suficient
 4. **Pressupost** - El triple acristalamiento ofereix el màxim rendiment però és més costós`,
     featured: true,
-    image: "/blog/ventanas.jpg",
+    image: "/blog/blog-ventanas-editorial.png",
   },
   {
     slug: "tendencias-mamparas-bano-2024",
-    title: "Tendències en mampares de bany per a 2024",
-    titleEs: "Tendencias en mamparas de baño para 2024",
+    title: "Tendències actuals en mampares de bany",
+    titleEs: "Tendencias actuales en mamparas de baño",
     excerpt: "Descobreix les últimes tendències en disseny de mampares de dutxa: del minimalisme al luxe accessible. Novetats en materials, colors i funcionalitats.",
     excerptEs: "Descubre las últimas tendencias en diseño de mamparas de ducha: del minimalismo al lujo accesible. Novedades en materiales, colores y funcionalidades.",
     date: "2024-05-08",
@@ -68,7 +68,7 @@ Amb la creixent preocupació per la higiene, les mampares amb tractament antibac
 ### 5. Disseny accessible
 Les mampares amb portes correderes amples i sense barreres arquitectòniques per a persones amb mobilitat reduïda o persones grans.`,
     featured: true,
-    image: "/blog/mamparas.jpg",
+    image: "/blog/blog-mamparas-editorial.png",
   },
   {
     slug: "mantenimiento-cristales-guia-practica",
@@ -108,7 +108,7 @@ Les mampares amb portes correderes amples i sense barreres arquitectòniques per
 - Condensació persistent entre els vidres (indica que el sellat ha fallat)
 - Necessitat de canviar juntes o perfils`,
     featured: false,
-    image: "/blog/mantenimiento.jpg",
+    image: "/blog/blog-mantenimiento-editorial.png",
   },
   {
     slug: "barandillas-cristal-seguretat-disseny",
@@ -148,7 +148,7 @@ Sistema de fixació mitjançant peces metàl·liques en forma d'aranya que agafe
 - **Durabilitat**: alta resistència a impactes i condicions meteorològiques
 - **Versatilitat**: s'adapta a qualsevol forma o disseny`,
     featured: false,
-    image: "/blog/barandillas.jpg",
+    image: "/blog/blog-barandillas-editorial.png",
   },
   {
     slug: "diferencias-cristal-templado-laminado",
@@ -195,12 +195,12 @@ Format per dues o més capes de cristall unides amb làmines de PVB (polivinil b
 
 La elecció depèn de l'aplicació. Per a baranes i aplicacions de màxima seguretat, el laminat és recomanable. Per a mampares de bany i interiors, el templat és suficient i més econòmic.`,
     featured: false,
-    image: "/blog/cristal-templado.jpg",
+    image: "/blog/blog-templado-laminado-editorial.png",
   },
   {
     slug: "innovaciones-cristal-inteligente-2024",
-    title: "Innovacions en cristall intel·ligent per a 2024",
-    titleEs: "Innovaciones en cristal inteligente para 2024",
+    title: "Aplicacions actuals del cristall intel·ligent",
+    titleEs: "Aplicaciones actuales del cristal inteligente",
     excerpt: "El cristall del futur ja és aquí: switchable, electrocròmic, i amb panells solars integrats. Descobreix les tecnologies que revolucionaran el sector.",
     excerptEs: "El cristal del futuro ya está aquí: switchable, electrocrómico, y con paneles solares integrados. Descubre las tecnologías que revolucionarán el sector.",
     date: "2024-04-10",
@@ -237,7 +237,7 @@ El futur de les finestres: cristall amb cèl·lules fotovoltaiques transparents 
 
 Algunes d'aquestes tecnologies ja estan disponibles però a preus elevats. Es preveu que el cristall intel·ligent esdevindrà més accessible a partir de 2026-2027 a mesura que la producció s'escali i els costos de fabricació baixin.`,
     featured: false,
-    image: "/blog/cristal-inteligente.jpg",
+    image: "/blog/blog-cristal-inteligente-editorial.png",
   },
   {
     slug: "reformas-con-cristal-ahorrar-energia",
@@ -281,7 +281,7 @@ A Catalunya existeixen diverses ajudes per a reformes d'eficiència energètica:
 
 Una reforma de finestres s'amortitza típicament entre 3 i 7 anys, depenent de l'estalvi aconseguit i el preu de l'energia. Amb els preus actuals de l'electricitat i el gas, l'amortització és cada vegada més ràpida.`,
     featured: false,
-    image: "/blog/energia.jpg",
+    image: "/blog/blog-energia-editorial.png",
   },
   {
     slug: "espejos-decorativos-tendencias",
@@ -329,6 +329,6 @@ El mirall del bany ha evolucionat: amb LED, antiboira, i fins i tot amb armari i
 - Els miralls rodons o ovalats suavitzen l'ambient
 - Agrupa miralls de diferents mides per crear un mur decoratiu`,
     featured: false,
-    image: "/blog/espejos.jpg",
+    image: "/blog/blog-espejos-editorial.png",
   },
 ];

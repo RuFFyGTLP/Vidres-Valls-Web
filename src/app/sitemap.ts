@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/aviso-legal",
   ];
 
-  const locales = ["ca", "es"];
+  const locales = ["ca", "es", "en"];
 
   const sitemap: MetadataRoute.Sitemap = [];
 

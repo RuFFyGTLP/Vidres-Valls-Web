@@ -1,7 +1,8 @@
 import { defineRouting } from 'next-intl/routing';
 
 export const routing = defineRouting({
-  locales: ['ca', 'es'],
+  locales: ['ca', 'es', 'en'],
   defaultLocale: 'ca',
-  localePrefix: 'as-needed',
+  localePrefix: 'always',
+  localeDetection: false,
 });

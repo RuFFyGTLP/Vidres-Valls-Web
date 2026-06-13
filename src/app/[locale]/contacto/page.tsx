@@ -2,16 +2,18 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import { Input, Textarea } from "@/components/ui/Input";
 import CTABanner from "@/components/sections/CTABanner";
+import { getLeadAttribution } from "@/lib/lead-client";
+import { trackEvent } from "@/components/providers/AnalyticsProvider";
 import {
   AppWindow, DoorOpen, ShowerHead, Mountain,
   Glasses, Sparkles, Wrench, Hammer,
@@ -58,7 +60,7 @@ const faqs = [
   },
   {
     q: "Feu servei d'urgències?",
-    a: "Sí, disposem de servei d'urgències 24h per a trencalls i incidents. Truca'ns al 616 88 74 38.",
+    a: "Atendemos sustituciones y reparaciones. Llámanos al 616 88 74 38 para consultar disponibilidad.",
   },
 ];
 
@@ -103,13 +105,14 @@ export default function ContactoPage() {
   const tSrv = useTranslations("services");
   const tCta = useTranslations("cta");
   const searchParams = useSearchParams();
+  const locale = (useParams().locale as string) || "ca";
 
   const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState("");
 
   const defaultService = searchParams.get("servicio") ?? "";
 
-  const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm<ContactForm>({
+  const { register, handleSubmit, control, setValue, formState: { errors, isSubmitting } } = useForm<ContactForm>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
       service: defaultService,
@@ -117,7 +120,8 @@ export default function ContactoPage() {
     },
   });
 
-  const selectedService = watch("service");
+  const selectedService = useWatch({ control, name: "service" });
+  const selectedUrgency = useWatch({ control, name: "urgency" });
 
   const onSubmit = async (data: ContactForm) => {
     if (data.honeypot) return; // spam detected
@@ -126,22 +130,23 @@ export default function ContactoPage() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, locale, source: "contact_form", ...getLeadAttribution() }),
       });
       if (!res.ok) {
         const err = await res.json();
         throw new Error(err.error || "Error desconegut");
       }
       setSubmitted(true);
-    } catch (err: any) {
-      setServerError(err.message || t("error"));
+      trackEvent("generate_lead", { source: "contact_form", locale, service: data.service || "" });
+    } catch (err) {
+      setServerError(err instanceof Error ? err.message : t("error"));
     }
   };
 
   return (
     <div>
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-dark-bg via-[#0f172a] via-primary/20 to-dark-bg py-20 md:py-28">
+      <section className="page-hero page-hero--contact py-20 md:py-28">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
         </div>
@@ -209,13 +214,12 @@ export default function ContactoPage() {
                             key={srv}
                             type="button"
                             onClick={() => {
-                              const event = { target: { value: srv } };
-                              register("service").onChange(event as any);
+                              setValue("service", srv, { shouldDirty: true, shouldValidate: true });
                             }}
                             className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 transition-all ${
                               selected
                                 ? "border-primary bg-primary/5"
-                                : "border-border bg-white hover:border-primary/30"
+                                : "border-border bg-card hover:border-primary/30"
                             }`}
                           >
                             <Icon className={`w-5 h-5 ${selected ? "text-primary" : "text-text-muted"}`} />
@@ -268,19 +272,18 @@ export default function ContactoPage() {
                         { key: "urgent", label: "Urgent", icon: Zap, color: "text-amber-500" },
                         { key: "emergency", label: "Emergència", icon: Phone, color: "text-error" },
                       ].map(({ key, label, icon: Icon, color }) => {
-                        const selected = watch("urgency") === key;
+                        const selected = selectedUrgency === key;
                         return (
                           <button
                             key={key}
                             type="button"
                             onClick={() => {
-                              const event = { target: { value: key } };
-                              register("urgency").onChange(event as any);
+                              setValue("urgency", key, { shouldDirty: true, shouldValidate: true });
                             }}
                             className={`flex items-center justify-center gap-2 p-3 rounded-xl border-2 text-sm font-semibold transition-all ${
                               selected
                                 ? "border-primary bg-primary/5 text-primary"
-                                : "border-border bg-white text-text-muted hover:border-primary/30"
+                                : "border-border bg-card text-text-muted hover:border-primary/30"
                             }`}
                           >
                             <Icon className={`w-4 h-4 ${color}`} />
@@ -306,6 +309,7 @@ export default function ContactoPage() {
                     type="text"
                     tabIndex={-1}
                     autoComplete="off"
+                    aria-hidden="true"
                     className="absolute -left-[9999px]"
                     {...register("honeypot")}
                   />
